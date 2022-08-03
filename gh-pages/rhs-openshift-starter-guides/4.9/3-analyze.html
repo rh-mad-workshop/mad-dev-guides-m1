@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>3. Analyze - 25 minutes :: Moder Application Development - Dev Track</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/3-analyze.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const clusterName = urlParams.get('CLUSTER_SUBDOMAIN');
+      const projectName = urlParams.get('PROJECT');
+      if (clusterName) {
+        showCluster( clusterName );
+      }
+      else {
+        showClusterForm();
+      }
+
+      if (projectName) {
+        showProject( projectName );
+      } else {
+        showProjectForm();
+      }
+    } );
+
+
+    function sliceCluster(clusterName){
+      if (clusterName.length > 70) {
+          return "..." + clusterName.slice(35);
+      } else {
+          return clusterName;
+      }
+    }
+
+    function showCluster( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
+      document.getElementById('clusterfield2').value = clusterName;
+
+    }
+
+    function showClusterForm( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function gowithcluster() {
+      elClusterInput = document.getElementById('clusterfield');
+      elProjectInput = document.getElementById('projectfield2');
+
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+    function showProject( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "none";
+      document.getElementById('navbar-form-project-filled').style.display = "flex";
+      document.getElementById('project').textContent = projectName;
+      document.getElementById('projectfield2').value = projectName;
+    }
+
+    function showProjectForm( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "flex";
+      document.getElementById('navbar-form-project-filled').style.display = "none";
+    }
+
+    function gowithproject() {
+      elProjectInput = document.getElementById('projectfield');
+      elClusterInput = document.getElementById('clusterfield2');
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Moder Application Development - Dev Track</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithcluster();">
+            <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input type="hidden" id="projectfield2" name="projectfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="cluster_subdomain"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+         <div class="navbar-item" id="navbar-form-project-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithproject();">
+            <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
+            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="project"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.9">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">Assessment</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="3-analyze.html">Analyze</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.9</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.9</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="3-analyze.html">Analyze</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/danieloh/Downloads/demo/mad-dev-m1-guides/documentation/modules/ROOT/pages/3-analyze.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">3. Analyze - 25 minutes</h1>
+<div class="sect1">
+<h2 id="_goals_of_this_lab"><a class="anchor" href="#_goals_of_this_lab"></a>Goals of this lab</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you have realized in the previous <em>assessment</em> lab, you need to analyze the legacy applications in terms of identifying actual code of lines for the modernization issues as well as estimating time and effort for the modernization project.</p>
+</div>
+<div class="paragraph">
+<p>The goal is to analyze the <em>customers</em> application by scanning all source code and properties using the <a href="https://developers.redhat.com/products/mta/overview" target="_blank" rel="noopener">Migration Toolkit for Applications</a> (MTA) tool. Then, you&#8217;ll understand how to get started with the code modification along with the analysis report.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The main difference between <strong>Tackle</strong> and <strong>MTA</strong> tool is to analyze actual application code. Then the report shows the line of codes for the migration issues and possible solutions to fix the issues. MTA 6 will include the assessment capabilities in the future.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Migration Toolkit for Applications (MTA) is an extensible and customizable rule-based tool that helps simplify migration of Java applications.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mta-logo.png" alt="mta-logo">
+</div>
+</div>
+<div class="paragraph">
+<p>MTA is also used by organizations for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Planning and work estimation</p>
+</li>
+<li>
+<p>Identifying migration issues and providing solutions</p>
+</li>
+<li>
+<p>Detailed reporting</p>
+</li>
+<li>
+<p>Built-in rules and migration paths</p>
+</li>
+<li>
+<p>Rule extensibility and customization</p>
+</li>
+<li>
+<p>Ability to analyze source code or application archives</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Read more about it in the <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/5.3" target="_blank" rel="noopener">MTA documentation</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_3_1_create_a_new_project_in_mta_web_console"><a class="anchor" href="#_3_1_create_a_new_project_in_mta_web_console"></a>3.1. Create a New Project in MTA Web Console</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Open a new browser to access the MTA web console that is provided from the <strong>shared environment detail page</strong>. Use the following credential.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Username or email: <code>mta</code></p>
+</li>
+<li>
+<p>Password: <code>password</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mta-login.png" alt="mta-login">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Create project</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mta-1.png" alt="MTA landing page">
+</div>
+</div>
+<div class="paragraph">
+<p>Enter a project name as shown below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Name: <code>Customers Service</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-project.png" alt="Create project">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_3_1_1_add_applications"><a class="anchor" href="#_3_1_1_add_applications"></a>3.1.1. Add applications</h3>
+<div class="paragraph">
+<p>First, you need to <em>download</em> or <em>git clone</em> the <code>app-mod-project</code> from your <em>Gitea</em> repository. You can find the Gitea URL and credentials in the <strong>shared environment detail page</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Gitea username - <code>userXX</code></p>
+</li>
+<li>
+<p>Gitea password - <code>openshift</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gitea-repo.png" alt="gitea-repo">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you download or clone the project to your local file system, explore if the <code>customers-tomcat.war</code> file exists in the <strong>packages-mta</strong> folder.</p>
+</div>
+<div class="paragraph">
+<p>Go back to the MTA web console. Then, click on <code>Browse</code> in the <code>Add applications</code> page to select the <strong>customers-tomcat.war</strong> file from your local file system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/add-applications.png" alt="Add applications">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_1_2_configure_the_analysis"><a class="anchor" href="#_3_1_2_configure_the_analysis"></a>3.1.2. Configure the analysis</h3>
+<div class="paragraph">
+<p>You will now be presented with options for transformation targets. As this is a tomcat application, we’re <strong>not</strong> going to include the EAP migration path.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>JBoss EAP is selected by default in the migration path so you need to deselect it by clicking on it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Click the EAP migration path</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-analysis.png" alt="Configure Analysis">
+</div>
+</div>
+<div class="paragraph">
+<p>We will focus on containerizing the application. Since this is going to be a linux container, it makes sense to do a sanity check to avoid and Windows paths might remain in the code from previous iterations. We also going to investigate removing reliance on proprietary JDK licenses, so we going to select OpenJDK as a target.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/configure-analysis-checked.png" alt="Configure Analysis">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Click Containers, Linux, and OpenJDK as the targets</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="paragraph">
+<p>You will now be presented with options for packages. In order to accelerate the analysis, we will choose only the business packages related to our application. In the case of this application, these classes belong to the <code>io.konyeyor</code> package.</p>
+</div>
+<div class="paragraph">
+<p>Select <code>all packages</code> in the <strong>Included packaged</strong> box. Click on <code>&lt;</code> arrow button to exclude all packages.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/packages-exclude.png" alt="Select packages">
+</div>
+</div>
+<div class="paragraph">
+<p>There&#8217;s <strong>no</strong> included packaged on the right box.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/packages-empty.png" alt="Select packages">
+</div>
+</div>
+<div class="paragraph">
+<p>Select only <code>io.konveyor</code> package. Then, click on <code>&gt;</code> arrow button to include the package.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/packages.png" alt="Select packages">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_1_3_advanced"><a class="anchor" href="#_3_1_3_advanced"></a>3.1.3. Advanced</h3>
+<div class="paragraph">
+<p>You will now be presented with options for custom rules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/custom-rules.png" alt="Custom rules">
+</div>
+</div>
+<div class="paragraph">
+<p>MTA Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used on the analysis. We&#8217;ve provided some custom rules which will detect the usage of a specific library and make suggestions for changes to be performed to remove it.</p>
+</div>
+<div class="paragraph">
+<p>Click on <code>Add Rule</code> to upload a custom rule (<code>corporate-framework-config.windup.xml</code>) in the <strong>customrules</strong> directory that you have already downloaded in your file system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/upload-custom-rule.png" alt="upload-custom-rule">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Close</code>. Make sure to enable the custom rule by clicking the toggle button. Click on <code>Next</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/enable-custom-rule.png" alt="enable-custom-rule">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, you will now be presented with options for labels.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/labels.png" alt="Labels">
+</div>
+</div>
+<div class="paragraph">
+<p>No custom labels are required for this analysis. Click on <code>Next</code>.</p>
+</div>
+<div class="paragraph">
+<p>You will now be presented with options to fine tune the analysis, for the moment we will stick with the default options.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/fine-tune.png" alt="Fine tuning">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, we are presented with a summary of the configuration for our analysis.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/finish-project.png" alt="Finish project">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Save and run</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now the analysis has been scheduled, and once it is finished we will be able to access the reports. Stay on this view until the analysis is finished.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/active-analysis.png" alt="Active analysis">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_3_2_understanding_the_report"><a class="anchor" href="#_3_2_understanding_the_report"></a>3.2. Understanding the report</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Dashboard gives an overview of the entire application migration effort. It summarizes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The incidents and story points by category</p>
+</li>
+<li>
+<p>The incidents and story points by level of effort of the suggested changes</p>
+</li>
+<li>
+<p>The incidents by package</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Story points are an abstract metric commonly used in Agile software development to estimate the relative level of effort needed to implement a feature or change. Migration Toolkit for Application uses story points to express the level of effort needed to migrate particular application constructs, and the application as a whole. The level of effort will vary greatly depending on the size and complexity of the application(s) to migrate.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once the report is finished, click on the link to access the report. Click on <code>customers-tomcat.war</code> application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-view.png" alt="View report">
+</div>
+</div>
+<div class="paragraph">
+<p>The reports provide all kinds of information about the application, like the technologies it uses, dependencies, but most importantly issues that need to get fixed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-dashboard.png" alt="report dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the <code>Issues</code> tab.</p>
+</div>
+<div class="paragraph">
+<p>This view shows us the list of issues that prevent an application to run on the target runtime. We can see that the application has a few mandatory issues that need to be addressed.</p>
+</div>
+<div class="paragraph">
+<p>Click on <code>Hard coded IP address</code>.</p>
+</div>
+<div class="paragraph">
+<p>By choosing the issue we can see where it was detected and view a hint on how to solve it.  It looks like the config files are pointing to some static IPs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-hint.png" alt="report hint">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>File system issue</code>.</p>
+</div>
+<div class="paragraph">
+<p>It looks like a problem has been detected on some class coming from the config library. We are analyzing the binary, so the dependencies have been analyzed as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-hint-fs.png" alt="report hint file system">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the <code>io.konveyor.demo.config.ApplicationConfiguration</code> file. It shows the <code>Source Report</code> that indicates which code has a migration issue.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-code.png" alt="report code">
+</div>
+</div>
+<div class="paragraph">
+<p>It looks like the custom rule got triggered and found some issues with the source code. This rule detects the use of a custom configuration library and gives some hints about what needs to be done to fix it.</p>
+</div>
+<div class="paragraph">
+<p>You analyzed the legacy application to learn what migration issues you have. You&#8217;ll refactor the application to fix the issues using the VS Code server in the next section.</p>
+</div>
+<div class="paragraph">
+<p>➡️ <a href="./4-refactor.adoc">4. Refactor</a></p>
+</div>
+<div class="paragraph">
+<p>⬅️ <a href="./2-assessment.adoc">2. Assessment</a></p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

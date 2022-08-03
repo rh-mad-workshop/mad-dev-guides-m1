@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1. Introduction - 10 minutes :: Moder Application Development - Dev Track</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/1-introduction.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const clusterName = urlParams.get('CLUSTER_SUBDOMAIN');
+      const projectName = urlParams.get('PROJECT');
+      if (clusterName) {
+        showCluster( clusterName );
+      }
+      else {
+        showClusterForm();
+      }
+
+      if (projectName) {
+        showProject( projectName );
+      } else {
+        showProjectForm();
+      }
+    } );
+
+
+    function sliceCluster(clusterName){
+      if (clusterName.length > 70) {
+          return "..." + clusterName.slice(35);
+      } else {
+          return clusterName;
+      }
+    }
+
+    function showCluster( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
+      document.getElementById('clusterfield2').value = clusterName;
+
+    }
+
+    function showClusterForm( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function gowithcluster() {
+      elClusterInput = document.getElementById('clusterfield');
+      elProjectInput = document.getElementById('projectfield2');
+
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+    function showProject( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "none";
+      document.getElementById('navbar-form-project-filled').style.display = "flex";
+      document.getElementById('project').textContent = projectName;
+      document.getElementById('projectfield2').value = projectName;
+    }
+
+    function showProjectForm( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "flex";
+      document.getElementById('navbar-form-project-filled').style.display = "none";
+    }
+
+    function gowithproject() {
+      elProjectInput = document.getElementById('projectfield');
+      elClusterInput = document.getElementById('clusterfield2');
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Moder Application Development - Dev Track</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithcluster();">
+            <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input type="hidden" id="projectfield2" name="projectfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="cluster_subdomain"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+         <div class="navbar-item" id="navbar-form-project-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithproject();">
+            <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
+            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="project"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.9">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html">Analyze</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.9</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.9</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="1-introduction.html">Introduction</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/danieloh/Downloads/demo/mad-dev-m1-guides/documentation/modules/ROOT/pages/1-introduction.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">1. Introduction - 10 minutes</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Application modernization strategies are often categorized into the <code>6R</code>’s framework that was popularized by Amazon (and prior the 5Rs by Gartner). Here is what they mean.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mod-strategies.png" alt="Modernization Strategies">
+</div>
+</div>
+<div class="paragraph">
+<p>Red Hat helps our customers' application modernization journey with this approach:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-mod-approach.png" alt="Modernization Approach">
+</div>
+</div>
+<div class="paragraph">
+<p>This workshop will walk you through 2 of the phases (<em>Assess</em>, <em>Rationalize</em>) as following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Assessment of the legacy application using <a href="https://www.konveyor.io/tools/tackle/" target="_blank" rel="noopener">Konveyor Tackle</a></p>
+</li>
+<li>
+<p>Analysis of the legacy application archive and refactor the application using <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/5.3" target="_blank" rel="noopener">Migration Toolkit for Applications</a></p>
+</li>
+<li>
+<p>Migration of a database to OpenShift virtualization using <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.3" target="_blank" rel="noopener">Migration Toolkit for Virtualization</a></p>
+</li>
+<li>
+<p>Deploy the modernized applications to Kubernetes/OpenShift using <a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html-single/cicd/index#gitops" target="_blank" rel="noopener">OpenShift GitOps (ArgCD)</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_1_understand_the_globex_retail_system_architecture"><a class="anchor" href="#_1_1_understand_the_globex_retail_system_architecture"></a>1.1. Understand the Globex Retail System Architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Globex system (workshop environment) has the whole microservices applications that are deployed multiple platforms such as virtual machines and container platform as below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/architecture_initial.png" alt="architecture_initial">
+</div>
+</div>
+<div class="paragraph">
+<p>Your initial state for this workshop is an environment that is spread over Red Hat Virtualization and Red Hat OpenShift Container Platform.</p>
+</div>
+<div class="paragraph">
+<p>Your application has been partially already moved from your legacy environments to OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>The Globex retail system is multiple services consisting of a Node.js frontend service which is getting its data via a gateway service. The gateway service is connected to three backend services: customers, orders and inventory. Each of the backend services uses its own database to store data.</p>
+</div>
+<div class="paragraph">
+<p>The services running on OpenShift are deployed in a namespace <code>retail</code>. The services are also managed using a GitOps approach by <strong>ArgoCD</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You might see the customers pods are failed to run due to <em>ImagePullBackOff Error</em>. It will be fixed when you finish the <strong>Deploy to Kubernetes</strong> section.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All source code for the applications as well as the GitOps YAML manifests for all services are stored in a (GitHub compatible) Gitea repository that for workshop purposes is hosted on the OpenShift cluster.</p>
+</div>
+<div class="paragraph">
+<p>The problem right now is the customers service:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The customers service uses an old Java code base running on Apache Tomcat in a VM on Red Hat Virtualization. In the course of this demonstration you will modernize the Java Code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.</p>
+</li>
+<li>
+<p>The customers database is using an <em>Oracle</em> database running as a VM in Red Hat Virtualization. Because this is Oracle you can not deploy the database as a Pod on OpenShift - therefore you will migrate the VM to OpenShift Virtualization using the OpenShift Migration Toolkit for Virtualization.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When you have finished this demonstration your deployment architecture should look like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/architecture_completed.png" alt="architecture_completed">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_2_workshop_environment"><a class="anchor" href="#_1_2_workshop_environment"></a>1.2. Workshop Environment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_2_1_claim_the_shared_workshop_cluster"><a class="anchor" href="#_1_2_1_claim_the_shared_workshop_cluster"></a>1.2.1. Claim the Shared Workshop Cluster</h3>
+<div class="paragraph">
+<p>Open a new web browser to access the <a href="https://demo.redhat.com/workshop/jj6sec" target="_blank" rel="noopener">RHPDS page</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Email: <code>Your Email Address</code> (e.g. <em>doh@redhat.com</em>)</p>
+</li>
+<li>
+<p>Access Password: <code>frankfurt</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/user-login.png" alt="user-login">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you logged in successfully, the detail information of the shared cluster environment shows as below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shared-cluster-details.png" alt="shared-cluster-details">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You have to use <strong>an unique username</strong> (e.g. <code>user1</code>) while you&#8217;re running the hands-on labs. For example, you need to deploy applications to your own project (e.g. <strong>retail-user1</strong>). Keep in mind that you should replace <code>userXX</code> with your own username in the next labs.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_2_2_openshift_cluster"><a class="anchor" href="#_1_2_2_openshift_cluster"></a>1.2.2. OpenShift Cluster</h3>
+<div class="paragraph">
+<p>Your OpenShift cluster is already configured with everything you need. Here are the details:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Latest stable OpenShift Container Platform is deployed as a bare metal single node OpenShift environment.</p>
+</li>
+<li>
+<p>The following operators have been installed and configured:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Gitea</code> to host the source code repositories)</p>
+</li>
+<li>
+<p><code>OpenShift Virtualization</code> to ultimately run the migrated Oracle VM)</p>
+</li>
+<li>
+<p><code>Migration Toolkit for Virtualization</code> to facilitate the migration of the Oracle VM from Red Hat Virtualization to Red Hat OpenShift Container Platform)</p>
+</li>
+<li>
+<p><code>OpenShift GitOps</code> to manage the deployed services using a GitOps approach through ArgoCD</p>
+</li>
+<li>
+<p><code>OpenShift Pipelines</code> to build the customer application from source code and deploy to the <code>retail</code> project using GitOps</p>
+</li>
+<li>
+<p><code>Migration Toolkit for Applications</code> (Tackle) to help modernize the customer service Java source code.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_2_3_visual_studio_code_server"><a class="anchor" href="#_1_2_3_visual_studio_code_server"></a>1.2.3. Visual Studio Code Server</h3>
+<div class="paragraph">
+<p>Visual Studio (VS) Code Servers are already deployed in the OpenShift cluster to facilitate an easy demonstration environment. This means you don&#8217;t need to install and configure VS Code on your local environment but you can just use the one provided in a web browser.</p>
+</div>
+<div class="paragraph">
+<p>This makes it easy to change any source code and configuration files in the cloned repository. The URL and password for the VS Code Server can be found in the <strong>shared environment detail page</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Open a new browser to access the VS Code server using the following credential.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Password: <code>openshift</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-server-login.png" alt="vscode-server-login">
+</div>
+</div>
+<div class="paragraph">
+<p>The graphical user interface (GUI) should look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode.png" alt="VSCode">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_3_explore_the_globex_retail_services_gui"><a class="anchor" href="#_1_3_explore_the_globex_retail_services_gui"></a>1.3. Explore the Globex Retail Services (GUI)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can check what the <code>Globex retail service</code> looks like currently by accessing the frontend web application. To find the URL to access the <strong>Frontend</strong> application, you need to use the OpenShift command line tool (<code>oc</code>). Go to the VS Code server and Open a new terminal that already installed the <em>oc</em> command by default.</p>
+</div>
+<div class="paragraph">
+<p>Click on <code>New Terminal</code> in <em>Terminal</em> menu in the VS Code. Once a new terminal is open, run the following <em>oc</em> command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Replace <code>YOUR_Openshift_API_URL</code> and <code>userXX</code> with your own information in the <strong>shared environment detail page</strong>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc login -u userXX -p openshift https://YOUR_Openshift_API_URL</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-terminal.png" alt="vscode-terminal">
+</div>
+</div>
+<div class="paragraph">
+<p>Find the <code>Route</code> URL for the <strong>Frontend</strong> application. Run the following <code>oc</code> command in the VS Code server terminal.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc get route ordersfrontend -n retail-userXX</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">NAME             HOST/PORT                                                                PATH   SERVICES         PORT   TERMINATION     WILDCARD
+ordersfrontend   ordersfrontend-retail-user1.apps.cluster-mkddz.sandbox1883.opentlc.com          ordersfrontend   web    edge/Redirect   None</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Navigate to the orders frontend route. You can use either <em>https</em> or <em>http</em> (which will be redirected to <em>https</em>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/frontend.png" alt="Frontend">
+</div>
+</div>
+<div class="paragraph">
+<p>Click through the three panels on the left.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Customers</code> shows the list of the customer information such as <em>fullname, city, country, and username</em>.</p>
+</li>
+<li>
+<p><code>Orders</code> shows current order information including relevant customer data.</p>
+</li>
+<li>
+<p><code>Products</code> shows the current inventory information.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_4_access_the_customer_data"><a class="anchor" href="#_1_4_access_the_customer_data"></a>1.4. Access the Customer Data</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The RHV environment not only has the Oracle Database VM deployed but it also hosts another VM which runs the old customer application on top of Apache Tomcat.</p>
+</div>
+<div class="paragraph">
+<p>From a terminal window you can use <code>curl</code> to demonstrate that the application is connected to the database.</p>
+</div>
+<div class="paragraph">
+<p>Use the IP Address of the <strong>Customer Service (Tomcat VM)</strong> to access the customer service. You can run the following <em>curl</em> command in the VS Code server&#8217;s terminal or your local environment since the Tomcat IP address is publicly accessible.</p>
+</div>
+<div class="paragraph">
+<p>Run the following <code>curl</code> commands in the VS Code server terminal.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">curl http://YOUR_Tomcat_VM_IP_ADDR:8080/customers-tomcat-0.0.1-SNAPSHOT/customers/1 ; echo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">{"id":1,"username":"phlegm_master_19","name":"Guybrush","surname":"Threepwood","address":"1060 West Addison","zipCode":"ME-001","city":"Melee Town","country":"Melee Island"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Try to get another customer data.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">curl http://YOUR_Tomcat_VM_IP_ADDR:8080/customers-tomcat-0.0.1-SNAPSHOT/customers/2 ; echo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">{"id":2,"username":"hate_guybrush","name":"Pirate","surname":"Lechuck","address":"Caverns of Meat, no number","zipCode":"MO-666","city":"Giant Monkey Head","country":"Monkey Island"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>➡️ <a href="./2-assessment.adoc">2. Assessment</a></p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

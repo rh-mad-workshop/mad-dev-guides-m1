@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>6. Deploy to Kubernetes - 30 minutes :: Moder Application Development - Dev Track</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/6-deploy-to-kubernetes.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const clusterName = urlParams.get('CLUSTER_SUBDOMAIN');
+      const projectName = urlParams.get('PROJECT');
+      if (clusterName) {
+        showCluster( clusterName );
+      }
+      else {
+        showClusterForm();
+      }
+
+      if (projectName) {
+        showProject( projectName );
+      } else {
+        showProjectForm();
+      }
+    } );
+
+
+    function sliceCluster(clusterName){
+      if (clusterName.length > 70) {
+          return "..." + clusterName.slice(35);
+      } else {
+          return clusterName;
+      }
+    }
+
+    function showCluster( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
+      document.getElementById('clusterfield2').value = clusterName;
+
+    }
+
+    function showClusterForm( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function gowithcluster() {
+      elClusterInput = document.getElementById('clusterfield');
+      elProjectInput = document.getElementById('projectfield2');
+
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+    function showProject( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "none";
+      document.getElementById('navbar-form-project-filled').style.display = "flex";
+      document.getElementById('project').textContent = projectName;
+      document.getElementById('projectfield2').value = projectName;
+    }
+
+    function showProjectForm( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "flex";
+      document.getElementById('navbar-form-project-filled').style.display = "none";
+    }
+
+    function gowithproject() {
+      elProjectInput = document.getElementById('projectfield');
+      elClusterInput = document.getElementById('clusterfield2');
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Moder Application Development - Dev Track</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithcluster();">
+            <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input type="hidden" id="projectfield2" name="projectfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="cluster_subdomain"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+         <div class="navbar-item" id="navbar-form-project-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithproject();">
+            <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
+            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="project"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.9">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html">Analyze</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.9</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.9</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="6-deploy-to-kubernetes.html">6. Deploy to Kubernetes - 30 minutes</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/danieloh/Downloads/demo/mad-dev-m1-guides/documentation/modules/ROOT/pages/6-deploy-to-kubernetes.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">6. Deploy to Kubernetes - 30 minutes</h1>
+<div class="sect1">
+<h2 id="_goals_of_this_lab"><a class="anchor" href="#_goals_of_this_lab"></a>Goals of this lab</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The goal is that you will build and deploy the modernized customer application to OpenShift using <a href="https://docs.openshift.com/container-platform/4.10/cicd/pipelines/understanding-openshift-pipelines.html" target="_blank" rel="noopener">OpenShift Pipelines</a> and <a href="https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html" target="_blank" rel="noopener">GitOps</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the <a href="https://tekton.dev/" target="_blank" rel="noopener">Tekton</a> Pipeline to build and deploy the new, modernized application using Red Hat JBoss Web Server instead of Apache Tomcat as the runtime.</p>
+</li>
+<li>
+<p>Set up the configuration for the <strong>customers</strong> service to connect to the Oracle database VM which is now running on OpenShift Container Platform</p>
+</li>
+<li>
+<p>Test the <strong>customers</strong> service</p>
+</li>
+<li>
+<p>Update the configuration for the <strong>gateway</strong> service to now point to the modernized <strong>customers</strong> service.</p>
+</li>
+<li>
+<p>Demonstrate that your <strong>frontend</strong> service still works as before.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_1_update_oracle_dmbs_connection_using_helm"><a class="anchor" href="#_6_1_update_oracle_dmbs_connection_using_helm"></a>6.1. Update Oracle DMBS Connection using Helm</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_6_1_1_why_openshift_with_helm"><a class="anchor" href="#_6_1_1_why_openshift_with_helm"></a>6.1.1. Why OpenShift with Helm?</h3>
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.10/applications/working_with_helm_charts/understanding-helm.html" target="_blank" rel="noopener">Helm</a> is a package and install manager that standardizes and simplifies packaging and deployment of containerized applications with Kubernetes, anywhere in the hybrid cloud. Helm lets developers package their applications so that they can be easily shared and deployed by anyone in their organization and beyond.</p>
+</div>
+<div class="paragraph">
+<p>Helm can also be used to automate <strong>day-1</strong> tasks like installation and basic configuration management for setting up the applications, and some <strong>day-2</strong> operations like performing some simple upgrades and rollbacks.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_1_2_update_the_helm_chart_for_a_new_jdbc_configuration"><a class="anchor" href="#_6_1_2_update_the_helm_chart_for_a_new_jdbc_configuration"></a>6.1.2. Update the Helm Chart for a new JDBC configuration</h3>
+<div class="paragraph">
+<p>The <strong>customers</strong> application in the OpenShift cluster has currently a connection failure because the application still tries to connect to the Oracle database running on RHV. To fix the issue, you need to update the <strong>JDBC</strong> configuration that points to the migrated Oracle database on OpenShift virtualization.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To save your time to go through the hands-on labs today, our SRE team has already migrated the VM running Oracle database to the OpenShift virtualization in the <strong>retail-userXX</strong> project.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The JDBC configuration is currently managed by the <em>helm chart</em> to automate day 1 &amp; 2 operations for the modernized Globex retail system. Let&#8217;s go back to the <strong>VS Code server</strong> and open the <code>persistence.properties</code> file in <strong>customer-tomcat-gitops/helm/secret</strong> directory.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gitops-persistence.png" alt="gitops-persistence">
+</div>
+</div>
+<div class="paragraph">
+<p>Update the <code>jdbc.url</code> value to the Oracle virtual machine&#8217;s name (<code>oracle-database</code>) on OpenShift. It should look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">jdbc.url=jdbc:oracle:thin:@oracle-database:1521/xepdb1</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Where is the <code>Save</code> button? VS Code server will autosave your changes, that is why you can’t find a <code>SAVE</code> button - no more losing code because you forgot to save. You can undo with <code>CTRL-Z</code> or <code>CMD-Z</code> or by using the <code>Edit &#8594; Undo</code> menu option.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Switch to the <code>Source Control</code> menu in VSCode. Click on <code>+</code> button to add the changes (<em>persistence.properties</em>).</p>
+</div>
+<div class="paragraph">
+<p>Type <code>Update jdbc.url</code> in the comment. Then, commit it(e.g. <em>Command + Enter on macOS</em>) and click on <code>Sync Changes</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-commit.png" alt="vscode-commit">
+</div>
+</div>
+<div class="paragraph">
+<p>Access your <code>Gitea</code> repository (e.g. <em><a href="https://gitea.apps.cluster-l6kxh.sandbox541.opentlc.com" class="bare">https://gitea.apps.cluster-l6kxh.sandbox541.opentlc.com</a></em>) in the <strong>shared environment detail page</strong> with the following credentials:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Gitea admin username: <code>userXX</code></p>
+</li>
+<li>
+<p>Gitea admin password: <code>openshift</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once you logged in to the Gitea admin console, you will see the latest commit (e.g. <em>08fb9fb6f4 Update jdbc.url</em>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gitea-update-file.png" alt="gitea-update-file">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_2_run_an_openshift_pipelines"><a class="anchor" href="#_6_2_run_an_openshift_pipelines"></a>6.2. Run an OpenShift Pipelines</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_6_2_1_why_openshift_pipelines"><a class="anchor" href="#_6_2_1_why_openshift_pipelines"></a>6.2.1 Why OpenShift Pipelines?</h3>
+<div class="paragraph">
+<p>OpenShift Pipelines provides a <strong>kubernetes-native CI/CD</strong> framework based on <a href="https://tekton.dev" target="_blank" rel="noopener">Tekton</a> to design and run your pipelines, and is designed to run each step of the CI/CD pipeline in its own container, allowing each step to scale independently to meet the demands of the pipeline.</p>
+</div>
+<div class="paragraph">
+<p>By extending Kubernetes/OpenShift with Custom Resource Definitions (CRDs), OpenShift Pipelines makes CI/CD concepts such as <code>pipeline</code>, <code>task</code>, and <code>step</code> natively in terms of increasing the scalability, security, ease of deployment capabilities of Kubernetes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton-concept.png" alt="tekton-concept">
+</div>
+</div>
+<div class="paragraph">
+<p>Each of these tasks can be described as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Clone Repository</strong> downloads the source code from the target Git repository.</p>
+</li>
+<li>
+<p><strong>Build from Source</strong> builds the application artifact from source code. This task has been tweaked to allow selecting the target subdirectory from the repository in which the target application source is available, allowing to have several application/components available in a single repository. <strong>This way of versioning different services/components is highly discouraged</strong>, as the optimal approach would be to have a dedicated repository for each component since their lifecycle should be independent. Nevertheless, this choice was made to gather all demo materials on a single repository for simplicity purposes.</p>
+</li>
+<li>
+<p><strong>Build Image</strong> uses the Dockerfile packaged on the root directory of an application to build an image and push it to the target registry. The image will be tagged with the short commit hash of the source it contains.</p>
+</li>
+<li>
+<p><strong>Update Manifest</strong> uses the short commit hash tag to update the application manifest in Git and point to the newly built image. Application deployment is then delegated to ArgoCD, which is continuously polling the configuration repository for changes and creates/updates all OpenShift objects accordingly.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The pipeline accepts the following parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>git-url</strong>: URL of the target Git repository.</p>
+</li>
+<li>
+<p><strong>git-branch</strong>: target branch to work with. (<em>default: main</em>)</p>
+</li>
+<li>
+<p><strong>app-subdir</strong>: Subdirectory from the repository in which the application source code is stored.</p>
+</li>
+<li>
+<p><strong>target-namespace</strong>: Namespace/project in which to deploy the application.</p>
+</li>
+<li>
+<p><strong>target-registry</strong>: Registry to push the built image to. (<em>default: image-registry.openshift-image-registry.svc:5000</em>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_2_2_execute_the_customers_pipelines"><a class="anchor" href="#_6_2_2_execute_the_customers_pipelines"></a>6.2.2 Execute the Customers Pipelines</h3>
+<div class="paragraph">
+<p>In the future we will have a trigger and event listener on the pipeline. But for now you have to kick off the pipeline run manually.</p>
+</div>
+<div class="paragraph">
+<p>First, open a new browser to access the OpenShift web console that is provided from the <strong>shared environment detail page</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift_login.png" alt="openshift_login">
+</div>
+</div>
+<div class="paragraph">
+<p>Login using your credentials:</p>
+</div>
+<div class="paragraph">
+<p>Username: <code>userXX</code></p>
+</div>
+<div class="paragraph">
+<p>Password: <code>openshift</code></p>
+</div>
+<div class="paragraph">
+<p>Then, switch project to <code>cicd-userXX</code> in <em>Developer perspective</em>.</p>
+</div>
+<div class="paragraph">
+<p>Click on <code>Pipelines</code> on the left menu. You will see pre-defined <code>customers-deployment-pipeline</code> pipeline. Click on the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ama-pipeline.png" alt="ama-pipeline">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <code>Start</code> in <strong>Actions</strong> dropbox to run the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ama-pipeline-start.png" alt="ama-pipeline-start">
+</div>
+</div>
+<div class="paragraph">
+<p>A <strong>PipelineRun</strong> is how you can start a pipeline and tie it to the Git and image resources that should be used for this specific invocation.</p>
+</div>
+<div class="paragraph">
+<p>This dialog box is where you bind the final target values for the source repo of the <em>build-artifact</em> step, and the target namespace to deploy in the <em>update-manifest-and-push</em> step. Input the parameter and select resources as below then Click on <strong>Start</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>git-url: <code><a href="https://YOUR_GITEA_URL" class="bare">https://YOUR_GITEA_URL</a></code></p>
+</li>
+<li>
+<p>git-branch: <code>main</code></p>
+</li>
+<li>
+<p>app-subdir: <code>customers-tomcat-gitops</code></p>
+</li>
+<li>
+<p>target-namespace: <code>retail-userXX</code></p>
+</li>
+<li>
+<p>target-registry: <code>image-registry.openshift-image-registry.svc:5000</code></p>
+</li>
+<li>
+<p>ws: <code>customers-pvc</code> in <strong>PersistentVolumeClaim</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ama-pipeline-start-popup.png" alt="ama-pipeline-start-popup">
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as you started the <strong>customers-deployment-pipeline</strong> pipeline, a <em>pipelinerun</em> is instantiated and pods are created to execute the tasks that are defined in the pipeline. After a few minutes, the pipeline should finish successfully. You can hover over the steps to get a quick snapshot of the step’s progress, or click on the steps to see detailed logs of the steps.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ama-pipeline-complete.png" alt="ama-pipeline-complete">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_2_3_add_labels_for_better_topology_view"><a class="anchor" href="#_6_2_3_add_labels_for_better_topology_view"></a>6.2.3 Add Labels for better Topology View</h3>
+<div class="paragraph">
+<p>Globex retail system has deployed multiple microservices to the OpenShift cluster as well as each microservices has complex relations with the other microservices and databases. This architecture might not be understandable quickly and easily for developers and SREs. Luckily, OpenShift developer console provides a decent <code>topology</code> view with adding labels and annotations. It makes the topology view more clear and explicit relations among deployed applications in the same namespace.</p>
+</div>
+<div class="paragraph">
+<p>Add following labels and annotations to show which <em>languages</em>, <em>frameworks</em>, and <em>runtimes</em> are used for each application by running the following <code>oc</code> commands in terminal on the VS Code server where you logged in to the OpenShift cluster.</p>
+</div>
+<div class="paragraph">
+<p>Run the following command in the VS Code server terminal. Be sure to replace <code>userXX</code> with your <strong>username</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc project retail-userXX &amp;&amp; \
+oc label deployment/inventory app.kubernetes.io/part-of=inventory app.openshift.io/runtime=quarkus --overwrite &amp;&amp; \
+oc label deployment/postgresql-inventory app.kubernetes.io/part-of=inventory app.openshift.io/runtime=postgresql --overwrite &amp;&amp; \
+oc annotate deployment/inventory app.openshift.io/connects-to=postgresql-inventory --overwrite &amp;&amp; \
+oc label deployment/orders app.kubernetes.io/part-of=orders app.openshift.io/runtime=spring --overwrite &amp;&amp; \
+oc label deployment/postgresql-orders app.kubernetes.io/part-of=orders app.openshift.io/runtime=postgresql --overwrite &amp;&amp; \
+oc annotate deployment/orders app.openshift.io/connects-to=postgresql-orders --overwrite &amp;&amp; \
+oc label deployment/customers app.kubernetes.io/part-of=customers app.openshift.io/runtime=tomcat --overwrite &amp;&amp; \
+oc label deployment/ordersfrontend app.kubernetes.io/part-of=ordersfrontend app.openshift.io/runtime=nodejs --overwrite &amp;&amp; \
+oc annotate deployment/ordersfrontend app.openshift.io/connects-to=gateway --overwrite &amp;&amp; \
+oc label deployment/gateway app.kubernetes.io/part-of=gateway app.openshift.io/runtime=spring --overwrite &amp;&amp; \
+oc annotate deployment/gateway app.openshift.io/connects-to=inventory,orders,customers --overwrite</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You might have no connection between <code>gateway</code> and <code>customers</code>. In that case, you can add the connection by dragging in <em>Dev Console</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Go back to the <em>Topology View</em> of <code>retail-userXX</code> project in Developer perspective, the applications deployment should look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-topology.png" alt="app-topology">
+</div>
+</div>
+<div class="paragraph">
+<p>Now we need to update the <code>gateway</code> application&#8217;s configuration to connect to the <code>customers</code> based on Kubernetes service name rather than the <strong>IP address</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_3_sync_the_gateway_application_in_argocd"><a class="anchor" href="#_6_3_sync_the_gateway_application_in_argocd"></a>6.3. Sync the Gateway application in ArgoCD</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_6_3_1_why_openshift_gitops"><a class="anchor" href="#_6_3_1_why_openshift_gitops"></a>6.3.1 Why OpenShift GitOps?</h3>
+<div class="paragraph">
+<p><code>GitOps</code> in short is a set of practices to use <strong>Git pull requests</strong> to manage infrastructure and application configurations. Git repository in GitOps is considered the only source of truth and contains the entire state of the system so that the trail of changes to the system state are visible and auditable.</p>
+</div>
+<div class="paragraph">
+<p>Traceability of changes in GitOps is no novelty in itself as this approach is almost universally employed for the application source code. However GitOps advocates applying the same principles (<code>reviews</code>, <code>pull requests</code>, <code>tagging</code>, etc) to infrastructure and application configuration so that teams can benefit from the same assurance as they do for the application source code.</p>
+</div>
+<div class="paragraph">
+<p>Although there is no precise definition or agreed upon set of rules, the following principles are an approximation of what constitutes a GitOps practice:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarative description of the system is stored in Git (configs, monitoring, etc)
+*Changes to the state are made via pull requests
+*Git push reconciled with the state of the running system with the state in the Git repository</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_3_2_update_the_gateway_configuration"><a class="anchor" href="#_6_3_2_update_the_gateway_configuration"></a>6.3.2 Update the Gateway Configuration</h3>
+<div class="paragraph">
+<p>Go back to the VS Code server and open the <code>application.yaml</code> file in <strong>gatway/helm/config</strong> directory. Replace <strong>customers' URL</strong> with the following URL.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You must update the <em>application.yaml</em> file in the <code>gateway</code> project rather than any other projects that you&#8217;re working previously.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">http://customers:8080/customers-tomcat-0.0.1-SNAPSHOT/customers</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/update-customers-url.png" alt="update-customers-url">
+</div>
+</div>
+<div class="paragraph">
+<p>Switch to the <code>Source Control</code> menu in VSCode. Click on <code>+</code> button to add the changes (<em>application.yaml</em>).</p>
+</div>
+<div class="paragraph">
+<p>Type <code>Update customers url</code> in the comment. Then, commit it(e.g. <em>Command + Enter on macOS</em>) and click on <code>Sync Changes</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/update-customers-url-push.png" alt="update-customers-url-push">
+</div>
+</div>
+<div class="paragraph">
+<p>Access the ArgoCD admin console by clicking on <code>Open URL</code> over the <strong>argocd-server</strong> pod.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-server-route.png" alt="argocd-server-route">
+</div>
+</div>
+<div class="paragraph">
+<p>Then you will see the ArgoCD login page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_3_3_sync_the_configuration_change_by_argocd"><a class="anchor" href="#_6_3_3_sync_the_configuration_change_by_argocd"></a>6.3.3 Sync the configuration change by ArgoCD</h3>
+<div class="paragraph">
+<p>Click on <code>LOG VIA OPENSHIFT</code> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-login.png" alt="argocd-login">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, enter your OpenShift login credentials.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Username: <code>userXX</code></p>
+</li>
+<li>
+<p>Password: <code>openshift</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>you will see all applications such as <em>frontend, gateway, inventory, orders, and customers</em>. Click on <code>gateway</code> application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-gateway.png" alt="argocd-gateway">
+</div>
+</div>
+<div class="paragraph">
+<p>When the code change (e.g. <em>application.yaml</em>) completes in <em>Gitea</em> server, ArgoCD starts syncing the gateway application. It usually takes less than 3 minutes to complete the sync. You can also click on <code>REFRESH</code> manually to sync the change instantly.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-sync.png" alt="argocd-sync">
+</div>
+</div>
+<div class="paragraph">
+<p>Go to the OpenShift admin console to confirm if the <code>gateway-config</code> is updated based on the code change.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gateway-new-configmap.png" alt="gateway-new-configmap">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_4_revisit_the_globex_web_page"><a class="anchor" href="#_6_4_revisit_the_globex_web_page"></a>6.4. Revisit the GLOBEX web page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s go back to the <code>Customers</code> in the <strong>GLOBEX</strong> web page. You can find the frontend URL by running the following <code>oc</code> command in terminal on the <em>VS Code server</em>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc get route ordersfrontend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">NAME             HOST/PORT                                                                PATH   SERVICES         PORT   TERMINATION     WILDCARD
+ordersfrontend   ordersfrontend-retail-user1.apps.cluster-mkddz.sandbox1883.opentlc.com          ordersfrontend   web    edge/Redirect   None</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open a new web browser to paste the above URL. Then, you can see the same customers data as you had in the VM.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/frontend.png" alt="Frontend">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You might see <code>Unknown</code> result for customers data since the customers application can&#8217;t access the database on OpenShift Virtualization with an error - <code>java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist</code>. In that case, restart the customer pod via deleting the pod in OpenShift admin console.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>➡️ <a href="./7-enhance-apps.adoc">7. Enhance Applications with Managed Services</a></p>
+</div>
+<div class="paragraph">
+<p>⬅️ <a href="./5-rehost.adoc">5. Rehost</a></p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

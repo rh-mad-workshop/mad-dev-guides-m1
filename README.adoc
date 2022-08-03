@@ -1,0 +1,78 @@
+# Modern Application Development - Dev Track
+:experimental:
+:imagesdir: documentation/modules/ROOT/assets/images
+
+image::https://github.com/danieloh30/mad-dev-m1-guides/workflows/docs/badge.svg[docs]
+
+## Overview
+
+|===
+|| 
+
+|Audience Experience Level
+|Beginner
+
+|Average Time to Complete	
+|60 minutes
+|===
+
+This workshop aims to showcase how to modernize applications for solving the challenges faced by existing applications in the current landscape as below:
+
+* **Integration**: Challenging to leverage new cloud based services
+* **Scalability**: Not able to meet web scale due to data-centric architecture
+* **Reliability**: Unable to quickly deploy new capabilities
+* **Developer productivity and Business Agility**: Often low in comparison to cloud native applications
+
+Take a look at the [Konveyor Community’s Application Modernization Report for 2022](https://www.konveyor.io/modernization-report/) to understand how users and organizations define application modernization as well as top reasons for modernization.
+
+image::app-mod-report-2022.png[app-mod-report-2022]
+
+## Key Takeaways
+
+* Modernization has a broad spectrum of definitions, but containerizing and automation rank high. 
+* The containerizing is a broad enough trend to encompass multiple strategies including refactoring with Microservices. 
+* Increasing scalability and reliability are key reasons for modernization.
+
+## Technology Stack
+
+* Red Hat Enterprise Virtualization
+* Red Hat Application Runtimes (Quarkus, Spring Boot, Node.js, Tomcat)
+* Red Hat OpenShift (Pipeline, GitOps, Virtualization)
+* Oracle Database and PostgreSQL
+
+## Documentation
+
+This workshop is based on link:https://antora.org/[Antora] and link:https://github.com/redhat-scholars/courseware-template[Red Hat scholars template] to build HTML based tutorials.
+
+
+### Lab Parameters
+
+This lab supports both link:site.yml#L17[Antora variables] than query parameters. Query params makes the workshop content dynamic, like URLs specific for your cluster to copy and paste.
+
+NOTE: In the table above, CRC and Playground links use them.
+
+Here's the list of all query params used (they are all optional, but generated links won't work unless at least `CLUSTER_SUBDOMAIN` is set):
+
+[%header,cols=2*] 
+|===
+|PARAM
+|Description
+
+|`CLUSTER_SUBDOMAIN`
+|The subdomain for your OpenShift cluster in the form `apps.<cluster_name>.<base_domain>`, e.g. `apps.openshift.mydomain.tld`
+
+|`USERNAME`
+| The username of your OpenShift cluster
+
+|===
+
+Example:
+
+https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.9/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer&PROJECT=workshop
+
+
+## Contributing
+
+Please refer to the link:CONTRIBUTING.adoc#contributing-guide[how to contribute] on how you can contribute to the tutorial.
+
+ 

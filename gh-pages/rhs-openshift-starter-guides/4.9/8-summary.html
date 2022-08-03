@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>8. Summary - 10 minutes :: Moder Application Development - Dev Track</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/8-summary.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const clusterName = urlParams.get('CLUSTER_SUBDOMAIN');
+      const projectName = urlParams.get('PROJECT');
+      if (clusterName) {
+        showCluster( clusterName );
+      }
+      else {
+        showClusterForm();
+      }
+
+      if (projectName) {
+        showProject( projectName );
+      } else {
+        showProjectForm();
+      }
+    } );
+
+
+    function sliceCluster(clusterName){
+      if (clusterName.length > 70) {
+          return "..." + clusterName.slice(35);
+      } else {
+          return clusterName;
+      }
+    }
+
+    function showCluster( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
+      document.getElementById('clusterfield2').value = clusterName;
+
+    }
+
+    function showClusterForm( clusterName ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function gowithcluster() {
+      elClusterInput = document.getElementById('clusterfield');
+      elProjectInput = document.getElementById('projectfield2');
+
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+    function showProject( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "none";
+      document.getElementById('navbar-form-project-filled').style.display = "flex";
+      document.getElementById('project').textContent = projectName;
+      document.getElementById('projectfield2').value = projectName;
+    }
+
+    function showProjectForm( projectName ) {
+      document.getElementById('navbar-form-project-empty').style.display = "flex";
+      document.getElementById('navbar-form-project-filled').style.display = "none";
+    }
+
+    function gowithproject() {
+      elProjectInput = document.getElementById('projectfield');
+      elClusterInput = document.getElementById('clusterfield2');
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Moder Application Development - Dev Track</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithcluster();">
+            <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input type="hidden" id="projectfield2" name="projectfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="cluster_subdomain"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+         <div class="navbar-item" id="navbar-form-project-empty">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="gowithproject();">
+            <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
+            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="project"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.9">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html">Analyze</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.9</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.9</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="8-summary.html">8. Summary - 10 minutes</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/danieloh/Downloads/demo/mad-dev-m1-guides/documentation/modules/ROOT/pages/8-summary.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">8. Summary - 10 minutes</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve learned today how to solve the business and technical challenges as below by modernizing existing applications along with the Red Hat application modernization strategies and tools.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Integration</strong>: Challenging to leverage new cloud based services</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: Not able to meet web scale due to data-centric architecture</p>
+</li>
+<li>
+<p><strong>Reliability</strong>: Unable to quickly deploy new capabilities</p>
+</li>
+<li>
+<p><strong>Developer Productivity</strong> and <strong>Business Agility</strong>: Often low in comparison to cloud native applications</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We believe that you had a chance to learn how the app migration strategies (e.g. <em>Rehost, Replatform, Refactor</em>) provide benefits and effort.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-mod-benefits.png" alt="app-mod-benefits">
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you ended up with the following modernized architecture to manage multiple microservices such as <em>frontend, gateway, customers, orders, and inventory</em> on Red Hat OpenShift. The new technology stack enables the SRE team to automate the applications deployment along with Managed application services, DevOps and CI/CD practices.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/modernized_architecture.png" alt="modernized_architecture">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/en/topics/application-modernization" target="_blank" rel="noopener">Understanding application modernization</a></p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/topics/devops/what-cicd-pipeline" target="_blank" rel="noopener">Cloud-native CI/CD on OpenShift</a></p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/en/resources/java-app-modernization-with-openshift-e-book" target="_blank" rel="noopener">eBook - Plan your Java application modernization journey</a></p>
+</li>
+<li>
+<p><a href="https://kubebyexample.com/en/learning-paths/migrating-kubernetes/assess-and-refactor-tackle" target="_blank" rel="noopener">Migrating Kubernetes Learning Path</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>⬅️ <a href="./7-enhance-apps.adoc">7. Enhance Applications with Managed Services</a></p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

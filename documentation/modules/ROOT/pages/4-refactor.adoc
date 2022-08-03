@@ -1,0 +1,60 @@
+= 4. Refactor - 25 minutes
+:imagesdir: ../assets/images
+
+== Goals of this lab
+
+The goal is to understand the modernization issues of the `customers` application and learn how you can fix them by the code modification. The MTA report also provides the details in terms of the *file name*, *path*, and *solution recommendations* for each issue. 
+
+In this lab you will also analyze the customers application once again using MTA if the all issue are fixed.
+
+== 4.1. Explore the Migration issues
+
+According to the analysis report, the migration issues are related to external configurations with hard coded static IP addresses. Let's dig into the issue on the code level. 
+
+Go to the web browser that opens the VS Code server. Explore the `customers-tomcat-legacy` project to open `PersistenceConfig.java` file in *src/main/java/io/konveyor/demo/ordermanagement/config* directory.
+
+image::persistence-class.png[persistence-class]
+
+The *dataSource()* method creates an `ApplicationConfiguration` instance to configure the JDBC variables such as _driverClassName_, _url_, _user_, and _password_. The ApplicationConfiguration ends up with referring to the hard coded IP address in `persistence.properties`.
+
+image::applicationConfiguration-class.png[applicationConfiguration-class]
+
+== 4.2. Understand the Solution
+
+The `customers-tomcat-ocp` project implements the *Customers* application with all the required changes and deploy the applications to OpenShift (Kubernetes). It also defines an OpenShift manifests file in the `ocp` directory.
+
+image::ocp-manifests.png[ocp-manifests]
+
+Let's find out how to fix the above configuration issue. Move to `customers-tomcat-ocp` project. Then, open `PersistenceConfig.java` file in *src/main/java/io/konveyor/demo/ordermanagement/config* directory and `pom.xml` file.
+
+*ApplicationConfiguration* class isn't required anymore to configure the JDBC variables but the *datasource* method still needs to use the environment instance. When you take a look at the *pom.xml*, the static properties file will be excluded when the application is building. 
+
+image::appconfig-pom-ocp.png[appconfig-pom-ocp]
+
+Using the kubernetes profile in the build is essential for the application to pick up the configuration file injected via a secret in the pod. That secret also has to be  created manually which would normally be done by packaging with maven. To generate these _Kubernetes_ resources, you usually run the following maven command with the _Kubernetes_ profile.
+
+[NOTE]
+====
+You don't need to run the following maven command today since you already have the solution artifact (`customers-tomcat-solution.war`) that are packaged with the fixed code by using the Kubernetes profile.
+====
+
+[source,sh]
+----
+mvn clean package -P kubernetes
+----
+
+Let's go back to the MTA web console. Then, create a new project to analyze the solution artifact. 
+
+* Project name: `New Customers Service`
+
+Select the `customers-tomcat-solution.war` file from your local file system in the *Add applications* page.
+
+Configure the project with the same settings and custom rules that we used for the Customers Service project. Once the report is finished, verify that it now reports `0` Story Points.
+
+You have successfully migrated this app and now ready to deploy to OpenShift, *congratulations!*
+
+image::report-solution-view.png[View report] 
+
+➡️ link:./5-rehost.adoc[5. Rehost]
+
+⬅️ link:./3-analyze.adoc[3. Analyze]

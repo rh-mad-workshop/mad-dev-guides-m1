@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/1-introduction.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/2-assessment.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/3-analyze.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/4-refactor.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/5-rehost.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/6-deploy-to-kubernetes.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/7-enhance-apps.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+<url>
+<loc>http://localhost:3000/rhs-build-course/index.html/rhs-openshift-starter-guides/4.9/8-summary.html</loc>
+<lastmod>2022-08-03T20:42:22.116Z</lastmod>
+</url>
+</urlset>
