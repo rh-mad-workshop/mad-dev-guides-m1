@@ -1,7 +1,6 @@
-name: rhs-openshift-starter-guides
-title: OpenShift Starter Guides
-version: 4.9
+name: mad-dev-m1-guides
+title: Module 1
+version: main
 nav:
   - modules/ROOT/nav.adoc
-
-start_page: ROOT:index.adoc
+start_page: ROOT:1-introduction.adoc

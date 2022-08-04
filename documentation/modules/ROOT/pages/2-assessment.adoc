@@ -148,7 +148,3 @@ image::complete-review.png[complete-review]
 Go to `Report` on the left menu. Then filter the report by `Retail` business service and you will find out the report details such as _Current landscape_, _Suggested adoption plan_, and _Identified risks_.
 
 image::report-review.png[report-review]
-
-➡️ link:./3-analyze.adoc[3. Analyze]
-
-⬅️ link:./1-introduction.adoc[1. Introduction]

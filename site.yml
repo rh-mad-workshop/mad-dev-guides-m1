@@ -2,7 +2,7 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Modern Application Development - Dev Track
+  title: Modern Application Development Roadshow - Dev Track
   url: http://redhat-scholars.github.io/mad-dev-m1-guides/
   start_page: mad-dev-m1-guides::1-introduction.adoc
 
@@ -15,6 +15,7 @@ content:
 asciidoc:
   attributes:
     experimental: true
+    page-pagination: true
     openshift-password: openshift
     module-type: m1
   extensions:

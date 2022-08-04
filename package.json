@@ -3,9 +3,9 @@
   "description": "OpenShift Admins Devops Course Documentation Site",
   "homepage": "https://redhat-scholars.github.io/openshift-admins-devops",
   "author": {
-    "email": "kamesh.sampath@hotmail.com",
-    "name": "Kamesh Sampath",
-    "url": "https://twitter.com/@kamesh_sampath"
+    "email": "doh@redhat.com",
+    "name": "Daniel Oh",
+    "url": "https://twitter.com/@danieloh30"
   },
   "dependencies": {
     "@antora/cli": "^2.3.1",

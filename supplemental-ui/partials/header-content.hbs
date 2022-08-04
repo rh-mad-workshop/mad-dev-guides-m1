@@ -2,10 +2,10 @@
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () { 
       const urlParams = new URLSearchParams(window.location.search);
-      const clusterName = urlParams.get('CLUSTER_SUBDOMAIN');
+      const userId = urlParams.get('USER_ID');
       const projectName = urlParams.get('PROJECT');
-      if (clusterName) {
-        showCluster( clusterName );
+      if (userId) {
+        showCluster( userId );
       }
       else {
         showClusterForm();
@@ -19,23 +19,23 @@
     } );
 
 
-    function sliceCluster(clusterName){
-      if (clusterName.length > 70) {
-          return "..." + clusterName.slice(35);
+    function sliceCluster(userId){
+      if (userId.length > 70) {
+          return "..." + userId.slice(35);
       } else {
-          return clusterName;
+          return userId;
       }
     }
 
-    function showCluster( clusterName ) {
+    function showCluster( userId ) {
       document.getElementById('navbar-form-empty').style.display = "none";
       document.getElementById('navbar-form-filled').style.display = "flex";
-      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
-      document.getElementById('clusterfield2').value = clusterName;
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(userId);
+      document.getElementById('clusterfield2').value = userId;
 
     }
 
-    function showClusterForm( clusterName ) {
+    function showClusterForm( userId ) {
       document.getElementById('navbar-form-empty').style.display = "flex";
       document.getElementById('navbar-form-filled').style.display = "none";
     }
@@ -44,7 +44,7 @@
       elClusterInput = document.getElementById('clusterfield');
       elProjectInput = document.getElementById('projectfield2');
 
-      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+      window.location.search = ('&USER_ID=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
     }
 
     function showProject( projectName ) {
@@ -62,15 +62,15 @@
     function gowithproject() {
       elProjectInput = document.getElementById('projectfield');
       elClusterInput = document.getElementById('clusterfield2');
-      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+      window.location.search = ('&USER_ID=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
     }
 
   </script>
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
-          src="{{uiRootPath}}/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
+      <a class="navbar-item" href="https://www.redhat.com/en/products/runtimes" target="_blank"><img
+          src="{{uiRootPath}}/img/Logo-Red_Hat-Runtimes-A-Reverse-RGB.png" height="40px" alt="Red Hat Runtimes"></a>
+      <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}" style="color: white;"><h3>{{site.title}}</h3></a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -84,7 +84,7 @@
               class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
 
           <form action="javascript:void(0);" onsubmit="gowithcluster();">
-            <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input size="40" id="clusterfield" type="text" placeholder="Enter USER ID">
             <input type="hidden" id="projectfield2" name="projectfield2" value="">
           </form>
         </div>
@@ -95,7 +95,7 @@
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
         </div>
 
-         <div class="navbar-item" id="navbar-form-project-empty">
+         {{!-- <div class="navbar-item" id="navbar-form-project-empty">
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
               class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
 
@@ -103,7 +103,7 @@
             <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
             <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
           </form>
-        </div>
+        </div> --}}
 
         <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
@@ -111,7 +111,7 @@
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
         </div>
 
-        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        {{!-- <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
         <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
         <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
         <div class="navbar-item has-dropdown is-hoverable">
@@ -123,7 +123,7 @@
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
             <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
           </div>
-      </div>
+      </div> --}}
     </div>
   </nav>
 </header>

@@ -182,7 +182,3 @@ image::report-code.png[report code]
 It looks like the custom rule got triggered and found some issues with the source code. This rule detects the use of a custom configuration library and gives some hints about what needs to be done to fix it.
 
 You analyzed the legacy application to learn what migration issues you have. You'll refactor the application to fix the issues using the VS Code server in the next section.
-
-➡️ link:./4-refactor.adoc[4. Refactor]
-
-⬅️ link:./2-assessment.adoc[2. Assessment]
