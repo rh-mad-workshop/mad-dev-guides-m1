@@ -23,7 +23,7 @@ This workshop aims to showcase how to modernize applications for solving the cha
 * **Reliability**: Unable to quickly deploy new capabilities
 * **Developer productivity and Business Agility**: Often low in comparison to cloud native applications
 
-Take a look at the [Konveyor Community’s Application Modernization Report for 2022](https://www.konveyor.io/modernization-report/) to understand how users and organizations define application modernization as well as top reasons for modernization.
+Take a look at the link:https://www.konveyor.io/modernization-report/[Konveyor Community’s Application Modernization Report for 2022] to understand how users and organizations define application modernization as well as top reasons for modernization.
 
 image::app-mod-report-2022.png[app-mod-report-2022]
 
@@ -68,7 +68,7 @@ Here's the list of all query params used (they are all optional, but generated l
 
 Example:
 
-https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.9/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer&PROJECT=workshop
+https://redhat-scholars.github.io/mad-dev-m1-guides/main/1-introduction.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=user1
 
 
 ## Contributing
