@@ -11,24 +11,13 @@ The goal is to assess the siloed current application portfolio and identify pote
 
 To start the assessment of the existing applications we will use the https://www.konveyor.io/tools/tackle[Tackle^] Application Assessment tool in the https://www.konveyor.io[Konveyor^] community to move our applications. We will use _Tackle_ to assess the `Customers` service based on the _Tomcat_ server on Red Hat Virtualization.
 
-<a href="https://tackle-tackle-%USERID%.apps.%SUBDOMAIN%" target="_blank" rel="noopener">Tackle web consoledddd</a>
-
 Open a new browser to access the https://tackle-tackle-%USERID%.apps.%SUBDOMAIN%[Tackle web console^].
 
-https://codeserver-codeserver-%USERID%.apps.%SUBDOMAIN%[VS Code server instance^]
-
-Open a new browser to access the https://tackle-tackle-user1.apps.cluster-rhgm7.sandbox1842.opentlc.com[Tackle web console2^].
-
-// * Username or email: `tackle`
-// * Password: `password`
-
-// image::tackle-login.png[Tackle Login]
-
-You will see existing application inventories such as *Customers*, *Orders*, and *RetailFrontend*.
+You will see existing application inventories such as *Customers*, *Orders*, *Inventory*, and more.
 
 image::application-inventory.png[application inventory]
 
-**Tackle Application Inventory** is the vehicle which selects applications for assessment by https://github.com/konveyor/tackle-pathfinder[Pathfinder^] and analysis by https://github.com/windup/[windup^]. It provides users four main functions:
+**Tackle Application Inventory** is the vehicle which selects applications for assessment by https://github.com/konveyor/tackle-pathfinder[Pathfinder^] and analysis by https://github.com/windup/[Windup^]. It provides users four main functions:
 
 * Maintain a portfolio of applications.
 * Link applications to the business services they support.
@@ -65,27 +54,25 @@ image::tackle-control-business-service.png[business service]
 
 == 2.3. Application inventory
 
-Let’s focus on the legacy application. We have added tags that represent its technology, like java, Tomcat and Oracle, and decided to add a custom tag type that allows us to identify which custom architecture libraries are used by each application.
+Let’s focus on the legacy application. We have added tags that represent its technology such as `Java`, `Tomcat` and `Oracle`, and decided to add a custom tag type that allows us to identify which custom architecture libraries are used by each application.
 
-=== 2.3.1. Update the Customers Application Inventory
+=== 2.3.1. Confirm the Customers Application Inventory
 
 Go to `Application inventory` on the left menu and click on `pencil` icon for the customers inventory.
 
 image::app-inventory-landing.png[app-inventory-landing]
 
-Fill in the following fields. Then, click on `Save`.
+When you click on `2 mores` button, it shows 5 tags.
 
-[NOTE]
-====
-Do not press the `enter` key. It will save and close the application inventory automatically.
-====
+* Oracle
+* Java
+* Tomcat
+* Corporate Custom Configuration Library
+* RHEL 8
 
-* Business service: `Retail`
-* Tags: `Java`, `Tomcat`, `RHEL 8`, `Oracle`
+Click on `Cancel`.
 
-image::update-new-app-inventory.png[update-new-app-inventory]
-
-=== 2.3.2. Re-Access the Legacy Customers Application
+=== 2.3.2. Access the Legacy Customers Application
 
 The assessment is driven by multiple `questionnaires` and aims to determine the suitability for containerization for a given application. It covers all the different areas of the *application landscape*, including the *technology*, *application lifecycle management*, and *operations*. These questionnaires allow the tool to identify potential risks that might prevent the application from running in containers or would require any kind of adjustment for that.
 

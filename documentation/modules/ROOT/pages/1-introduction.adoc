@@ -103,7 +103,7 @@ Click on `New Terminal` in Terminal menu in the VS Code. Once a new terminal is 
 [.console-input]
 [source,bash]
 ----
-oc login -u %USERID% -p openshift https://api.%SUBDOMAIN%:6443
+oc login -u %USERID% -p openshift https://openshift.default.svc:443
 ----
 
 image::vscode-terminal.png[vscode-terminal]
