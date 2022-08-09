@@ -52,7 +52,7 @@ Click on `Next`.
 
 First, you need to _download_ or _git clone_ the `app-mod-project` from your _Gitea_ repository. You can find the Gitea URL and credentials in the *shared environment detail page*. 
 
-* Gitea username - `userXX`
+* Gitea username - `-%USERID%`
 * Gitea password - `openshift`
 
 image::gitea-repo.png[gitea-repo]

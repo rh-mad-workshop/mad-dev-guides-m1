@@ -25,7 +25,7 @@ The *customers* application in the OpenShift cluster has currently a connection 
 
 [IMPORTANT]
 ====
-To save your time to go through the hands-on labs today, our SRE team has already migrated the VM running Oracle database to the OpenShift virtualization in the *retail-userXX* project.  
+To save your time to go through the hands-on labs today, our SRE team has already migrated the VM running Oracle database to the OpenShift virtualization in the *retail-%USERID%* project.  
 ====
 
 The JDBC configuration is currently managed by the _helm chart_ to automate day 1 & 2 operations for the modernized Globex retail system. Let's go back to the *VS Code server* and open the `persistence.properties` file in *customer-tomcat-gitops/helm/secret* directory.
@@ -52,7 +52,7 @@ image::vscode-commit.png[vscode-commit]
 
 Access your `Gitea` repository (e.g. _https://gitea.apps.cluster-l6kxh.sandbox541.opentlc.com_) in the *shared environment detail page* with the following credentials:
 
-* Gitea admin username: `userXX`
+* Gitea admin username: `%USERID%`
 * Gitea admin password: `openshift`
 
 Once you logged in to the Gitea admin console, you will see the latest commit (e.g. _08fb9fb6f4 Update jdbc.url_).
@@ -94,11 +94,11 @@ image::openshift_login.png[openshift_login]
 
 Login using your credentials:
 
-Username: `userXX`
+Username: `%USERID%`
 
 Password: `openshift`
 
-Then, switch project to `cicd-userXX` in _Developer perspective_. 
+Then, switch project to `cicd-%USERID%` in _Developer perspective_. 
 
 Click on `Pipelines` on the left menu. You will see pre-defined `customers-deployment-pipeline` pipeline. Click on the pipeline.
 
@@ -115,7 +115,7 @@ This dialog box is where you bind the final target values for the source repo of
 * git-url: `https://YOUR_GITEA_URL`
 * git-branch: `main`
 * app-subdir: `customers-tomcat-gitops`
-* target-namespace: `retail-userXX`
+* target-namespace: `retail-%USERID%`
 * target-registry: `image-registry.openshift-image-registry.svc:5000`
 * ws: `customers-pvc` in *PersistentVolumeClaim*
 
@@ -131,11 +131,11 @@ Globex retail system has deployed multiple microservices to the OpenShift cluste
 
 Add following labels and annotations to show which _languages_, _frameworks_, and _runtimes_ are used for each application by running the following `oc` commands in terminal on the VS Code server where you logged in to the OpenShift cluster.
 
-Run the following command in the VS Code server terminal. Be sure to replace `userXX` with your *username*.
+Run the following command in the VS Code server terminal. Be sure to replace `%USERID%` with your *username*.
 
 [source,sh]
 ----
-oc project retail-userXX && \
+oc project retail-%USERID% && \
 oc label deployment/inventory app.kubernetes.io/part-of=inventory app.openshift.io/runtime=quarkus --overwrite && \
 oc label deployment/postgresql-inventory app.kubernetes.io/part-of=inventory app.openshift.io/runtime=postgresql --overwrite && \
 oc annotate deployment/inventory app.openshift.io/connects-to=postgresql-inventory --overwrite && \
@@ -154,7 +154,7 @@ oc annotate deployment/gateway app.openshift.io/connects-to=inventory,orders,cus
 You might have no connection between `gateway` and `customers`. In that case, you can add the connection by dragging in _Dev Console_.
 ====
 
-Go back to the _Topology View_ of `retail-userXX` project in Developer perspective, the applications deployment should look like:
+Go back to the _Topology View_ of `retail-%USERID%` project in Developer perspective, the applications deployment should look like:
 
 image::app-topology.png[app-topology]
 
@@ -210,7 +210,7 @@ image::argocd-login.png[argocd-login]
 
 Then, enter your OpenShift login credentials.
 
-* Username: `userXX`
+* Username: `%USERID%`
 * Password: `openshift`
 
 you will see all applications such as _frontend, gateway, inventory, orders, and customers_. Click on `gateway` application.

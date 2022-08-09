@@ -2,67 +2,38 @@
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () { 
       const urlParams = new URLSearchParams(window.location.search);
-      const userId = urlParams.get('USER_ID');
-      const projectName = urlParams.get('PROJECT');
+      const userId = urlParams.get('USERID');
+      const subDomain = urlParams.get('SUBDOMAIN');
+      const tomcatIP = urlParams.get('TOMCATIP');
       if (userId) {
-        showCluster( userId );
+        showUserId( userId );
       }
       else {
-        showClusterForm();
-      }
-
-      if (projectName) {
-        showProject( projectName );
-      } else {
-        showProjectForm();
+        showUserIdForm();
       }
     } );
 
 
-    function sliceCluster(userId){
-      if (userId.length > 70) {
-          return "..." + userId.slice(35);
-      } else {
-          return userId;
-      }
-    }
-
-    function showCluster( userId ) {
+    function showUserId( userId ) {
       document.getElementById('navbar-form-empty').style.display = "none";
       document.getElementById('navbar-form-filled').style.display = "flex";
-      document.getElementById('cluster_subdomain').textContent = sliceCluster(userId);
-      document.getElementById('clusterfield2').value = userId;
+      document.getElementById('username').textContent = userId;
+      document.getElementById('subDomain').value = subDomain;
+      document.getElementById('tomcatIP').value = tomcatIP;
 
     }
 
-    function showClusterForm( userId ) {
+    function showUserIdForm( userId ) {
       document.getElementById('navbar-form-empty').style.display = "flex";
       document.getElementById('navbar-form-filled').style.display = "none";
     }
 
-    function gowithcluster() {
-      elClusterInput = document.getElementById('clusterfield');
-      elProjectInput = document.getElementById('projectfield2');
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubDomainInput = document.getElementById('subDomain');
+      elTomcatIPInput = document.getElementById('tomcatIP');
 
-      window.location.search = ('&USER_ID=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
-    }
-
-    function showProject( projectName ) {
-      document.getElementById('navbar-form-project-empty').style.display = "none";
-      document.getElementById('navbar-form-project-filled').style.display = "flex";
-      document.getElementById('project').textContent = projectName;
-      document.getElementById('projectfield2').value = projectName;
-    }
-
-    function showProjectForm( projectName ) {
-      document.getElementById('navbar-form-project-empty').style.display = "flex";
-      document.getElementById('navbar-form-project-filled').style.display = "none";
-    }
-
-    function gowithproject() {
-      elProjectInput = document.getElementById('projectfield');
-      elClusterInput = document.getElementById('clusterfield2');
-      window.location.search = ('&USER_ID=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
+      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&TOMCATIP=' + elTomcatIPInput.value);
     }
 
   </script>
@@ -77,53 +48,31 @@
         <span></span>
       </button>
     </div>
+    
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
               class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
 
-          <form action="javascript:void(0);" onsubmit="gowithcluster();">
-            <input size="40" id="clusterfield" type="text" placeholder="Enter USER ID">
-            <input type="hidden" id="projectfield2" name="projectfield2" value="">
+          <form action="javascript:void(0);" onsubmit="goWithUserId();">
+            <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+              <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+            </div>
+            <input size="40" id="userId" type="text" placeholder="Enter USER ID">
+            <input type="hidden" id="subDomain" name="subDomain" value="">
+            <input type="hidden" id="tomcatIP" name="tomcatIP" value="">
           </form>
         </div>
-
+        
         <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
-          <span class="navbar-text" id="cluster_subdomain"></span>
+          <span class="navbar-text" id="username"></span>
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
         </div>
 
-         {{!-- <div class="navbar-item" id="navbar-form-project-empty">
-          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
-              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
-
-          <form action="javascript:void(0);" onsubmit="gowithproject();">
-            <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
-            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
-          </form>
-        </div> --}}
-
-        <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
-          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
-          <span class="navbar-text" id="project"></span>
-          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
-        </div>
-
-        {{!-- <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
-        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
-        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">More Tutorials</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
-          </div>
-      </div> --}}
     </div>
   </nav>
 </header>
