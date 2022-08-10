@@ -3,8 +3,8 @@ runtime:
 
 site:
   title: Modern Application Development Roadshow - Dev Track
-  url: http://redhat-scholars.github.io/mad-dev-m1-guides/
-  start_page: mad-dev-m1-guides::1-introduction.adoc
+  url: http://redhat-scholars.github.io/mad-dev-guides-m1/
+  start_page: mad-dev-guides-m1::1-introduction.adoc
 
 content:
   sources:

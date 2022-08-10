@@ -66,9 +66,9 @@ Here's the list of all query params used (they are all optional, but generated l
 
 |===
 
-Example:
+Example [Dev Mode]:
 
-https://redhat-scholars.github.io/mad-dev-m1-guides/main/1-introduction.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=user1
+http://localhost:3000/mad-dev-guides-m1/main/1-introduction.html?USERID=user1&SUBDOMAIN=cluster-8s5ss.sandbox701.opentlc.com&tomcatIP=150.240.99.53
 
 
 ## Contributing
