@@ -24,7 +24,7 @@ asciidoc:
 
 ui:
   bundle:
-    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.8/ui-bundle.zip
+    url: https://github.com/danieloh30/course-ui/raw/main/ui-bundle-fix-rexp.zip
     snapshot: true
   supplemental_files: ./supplemental-ui
 

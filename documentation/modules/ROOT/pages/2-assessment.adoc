@@ -116,7 +116,7 @@ You will be presented with the review screen. It allows you to find out which ri
 
 image::review.png[review]
 
-Scroll down the screen to view the risks. This legacy application uses a discovery mechanism that is not cloud-friendly, which makes sense since it comes from a classic platform and accesses a database through a static IP.
+Scroll down the screen to view the risks. This legacy application uses a discovery mechanism that is not cloud-friendly, which makes sense since it comes from a classic platform and accesses a database through a *static IP*.
 
 image::review-high-risk.png[review-high-risk]
 
