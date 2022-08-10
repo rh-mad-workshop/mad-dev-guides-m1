@@ -1,8 +1,8 @@
-# Modern Application Development - Dev Track
+# Modern Application Development Dev Track - Module 1
 :experimental:
 :imagesdir: documentation/modules/ROOT/assets/images
 
-image::https://github.com/danieloh30/mad-dev-m1-guides/workflows/docs/badge.svg[docs]
+// image::https://github.com/danieloh30/mad-dev-m1-guides/workflows/docs/badge.svg[docs]
 
 ## Overview
 
