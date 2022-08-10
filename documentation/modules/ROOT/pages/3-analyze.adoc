@@ -169,11 +169,17 @@ It looks like a problem has been detected on some class coming from the config l
 
 image::report-hint-fs.png[report hint file system]
 
-Click on the `io.konveyor.demo.config.ApplicationConfiguration` file. It shows the `Source Report` that indicates which code has a migration issue.
+Click on `Legacy configuration issue`.
+
+It looks like the custom rule got triggered and found some issues with the source code.  This rule detects the use of a custom configuration library and gives some hints about what needs to be done to fix it.
+
+image::report-hint-custom.png[report hint custom rule]
+
+Click on the `io.konveyor.demo.ordermanagement.config.PersistenceConfig` file. 
 
 image::report-code.png[report code]
 
-It looks like the custom rule got triggered and found some issues with the source code. This rule detects the use of a custom configuration library and gives some hints about what needs to be done to fix it.
+You can now see exactly where the issue is located in the source code.  But you are still using a web environment.  You could check these reports for the changes, but that's not practical.  Because of that you developed a series of plugins for the most popular IDEs to make the like of the developer easier.
 
 == Summary
 
