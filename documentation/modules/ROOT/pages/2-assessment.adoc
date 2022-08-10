@@ -138,7 +138,7 @@ image::submit-review.png[submit-review]
 
 Now that you have completed the `2nd assessment` to update the `Application cross-cutting concerns` section. You have also identified a new `high` risk along with the external configuration references and dependencies.
 
-image::complete-review.png[complete-review]
+image::complete-review.png[complete-review] 
 
 Go to `Report` on the left menu. Then, you will find out the report details such as _Current landscape_, _Adoption candidate distribution_, _Suggested adoption plan_, and _Identified risks_.
 
