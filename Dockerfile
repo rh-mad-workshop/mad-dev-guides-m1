@@ -1,5 +1,5 @@
 # FROM node:latest
-FROM registry.redhat.io/rhel8/nodejs-14
+FROM node:14-alpine
 
 RUN mkdir -p /opt/src
 
