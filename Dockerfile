@@ -1,5 +1,5 @@
 # FROM node:latest
-FROM node:14-alpine
+FROM quay.io/openshiftlabs/node:14-alpine-mad
 
 RUN mkdir -p /opt/src
 
