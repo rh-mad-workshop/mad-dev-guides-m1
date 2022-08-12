@@ -79,7 +79,9 @@ Click on `Next`.
 
 [NOTE]
 ====
-It probably will take a few seconds to complete uploading the binary file.
+Please make sure to see following success popup message on the right top. It probably will take a few seconds to complete uploading the binary file. 
+
+image::upload-success.png[upload-success]
 ====
 
 === 3.1.2. Set targets
