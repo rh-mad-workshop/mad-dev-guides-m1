@@ -37,7 +37,7 @@ When you click on the `Customers` application, `Analyze` button will be enabled.
 image::application-analysis.png[application-analysis]
 
 // * Username or email: `mta`
-// * Password: `password`
+// * Password: `{openshift-password}`
 
 // image::mta-login.png[mta-login]
 
@@ -64,7 +64,7 @@ image::gitea-repo.png[gitea-repo]
 You can also log in to the Gitea repository with the following credentials.
 
 * Username - `%USERID%`
-* Password - `openshift`
+* Password - `{openshift-password}`
 ====
 
 Once you download or clone the project to your local file system, explore if the `customers-tomcat.war` file exists in the *packages-mta* folder.

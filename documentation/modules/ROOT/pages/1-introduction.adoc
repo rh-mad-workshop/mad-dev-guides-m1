@@ -86,7 +86,7 @@ This makes it easy to change any source code and configuration files in the clon
 
 To get started, access the link:https://codeserver-codeserver-%USERID%.apps.%SUBDOMAIN%[VS Code server instance^] and log in using the following `password`.
 
-* Password: `openshift`
+* Password: `{openshift-password}`
 
 image::vscode-server-login.png[vscode-server-login]
 

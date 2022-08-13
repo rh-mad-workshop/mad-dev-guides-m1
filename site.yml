@@ -17,7 +17,6 @@ asciidoc:
     experimental: true
     page-pagination: true
     openshift-password: openshift
-    module-type: m1
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js
