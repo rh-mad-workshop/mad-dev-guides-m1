@@ -130,9 +130,14 @@ image::finish-project.png[Finish project]
 
 Click on `Run`.
 
-Now the analysis has been scheduled, and once it is finished we will be able to access the reports. Stay on this view until the analysis is finished.
+Now the analysis has been scheduled, and once it is finished you will be able to access the reports. Stay on this view until the analysis is finished.
 
 Unfold the customers application. Then click on `Report`.
+
+[NOTE]
+====
+The analysis will take a few minutes to pull the Windup image and execute the application analysis. 
+====
 
 image::active-analysis.png[Active analysis]
 
