@@ -68,7 +68,7 @@ Here's the list of all query params used (they are all optional, but generated l
 
 Example [Dev Mode]:
 
-http://localhost:3000/mad-dev-guides-m1/main/1-introduction.html?USERID=user1&SUBDOMAIN=cluster-8s5ss.sandbox701.opentlc.com&tomcatIP=150.240.99.53
+http://localhost:3000/mad-dev-guides-m1/main/1-introduction.html?USERID=user1&SUBDOMAIN=cluster-8s5ss.sandbox701.opentlc.com&TOMCATIP=150.240.99.53
 
 ## Deploy to OpenShift
 
