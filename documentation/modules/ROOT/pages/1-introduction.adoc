@@ -30,19 +30,19 @@ Your application has been partially already moved from your legacy environments 
 
 The Globex retail system is multiple services consisting of a _Node.js_ frontend service which is getting its data via a gateway service. The gateway service is connected to three backend services such as customers, orders and inventory. Each service uses its own database to store data.
 
-The services running on OpenShift are deployed in a namespace `retail`. The services are eventually managed using the *OpenShift GitOps* and *Pipelines*.
+The services running on OpenShift are deployed in a namespace `retail-%USERID%`. The services are eventually managed using the *OpenShift GitOps* and *Pipelines* in module 3.
 
 [NOTE]
 ====
-You might see the customers pods are failed to run due to _ImagePullBackOff Error_. It will be fixed when you finish the *Deploy to Kubernetes* section.
+You might see the customers pods are failed to run due to _ImagePullBackOff Error_. It will be fixed when you finish in the OpenShift CI/CD and GitOps (module 3) section.
 ====
 
 All source code for the applications as well as the GitOps YAML manifests for all services are stored in a (GitHub compatible) *Gitea* repository that for workshop purposes is hosted on the OpenShift cluster.
 
 The problem right now is the *customers* service:
 
-* The customers service uses an old Java code base running on `Apache Tomcat` in a VM on `Red Hat Virtualization`. In the end, you will modernize the Java code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.
-* The customers database is using an `Oracle database` running as a VM in Red Hat Virtualization. Because this is Oracle you can not deploy the database as a Pod on OpenShift - therefore you will use a new virtual machine based on `OpenShift Virtualization` migrated by the `OpenShift Migration Toolkit for Virtualization`.
+* The customers service uses an old Java code base running on `Apache Tomcat` in a VM on `Red Hat Virtualization`. In this module you will assess and analyze the legacy Java application (customers) to learn the way you can modernize the Java code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.
+* The customers database is using an `Oracle database` running as a VM in Red Hat Virtualization. Because this is Oracle you can not deploy the database as a Pod on OpenShift - therefore you will have a new virtual machine based on `OpenShift Virtualization` migrated by the `OpenShift Migration Toolkit for Virtualization`.
 
 When you have finished the all modules in Dev track, your TO-BE deployment architecture should look like this:
 
