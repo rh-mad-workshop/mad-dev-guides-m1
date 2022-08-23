@@ -55,7 +55,7 @@ image::application-analysis.png[application-analysis]
 
 === 3.1.1. Analysis mode
 
-First, you need to _download_ or _git clone_ the `app-mod-project` from your link:https://gitea.apps.%SUBDOMAIN%/%USERID%/app-mod-projects[Gitea repository^]. 
+First, you need to _download_ or _git clone_ the `app-mod-project` from your link:https://gitea.apps.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. 
 
 image::gitea-repo.png[gitea-repo]
 
