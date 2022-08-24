@@ -20,13 +20,13 @@ We'll replace _Tackle_ with *Migration Toolkit for Applications (MTA) 6.x* that 
 
 == 1.1. Understand the Globex Retail System Architecture
 
-The Globex system (workshop environment) has the whole microservices applications that are deployed multiple platforms such as virtual machines and container platform as below.
+The Globex system (workshop environment) consists of microservices applications that are deployed across multiple platforms such as virtual machines and a container platform as depicted below.
 
 image::architecture_initial.png[architecture_initial]
 
 Your initial state for this workshop is an environment that is spread over Red Hat Virtualization and Red Hat OpenShift Container Platform.
 
-Your application has been partially already moved from your legacy environments to OpenShift.
+Your application has already been partially moved from your legacy environments to OpenShift.
 
 The Globex retail system is multiple services consisting of a _Node.js_ frontend service which is getting its data via a gateway service. The gateway service is connected to three backend services such as customers, orders and inventory. Each service uses its own database to store data.
 
