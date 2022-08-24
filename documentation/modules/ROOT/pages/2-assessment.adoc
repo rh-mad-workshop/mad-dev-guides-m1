@@ -5,7 +5,7 @@
 
 As part of the `Globex`’ digital transformation and cloud adoption initiative, the development and devops teams embarked upon a journey to modernize their existing siloed services running on the virtual machines on Red Hat Virtualization and containerized applications on Red Hat OpenShift separately.
 
-The goal is to assess the siloed current application portfolio and identify potential issues and risks to implement advanced cloud native architecture with the application modernization.
+The goal of this lab is to assess the siloed current application portfolio and identify potential issues and risks to implement advanced cloud native architecture with the application modernization.
 
 == 2.1. Access the Tackle Web Console
 
