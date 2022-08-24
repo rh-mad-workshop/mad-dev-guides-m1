@@ -1,4 +1,4 @@
-FROM docker.io/antora/antora as builder
+FROM quay.io/openshiftlabs/antora-for-mad-ws:1.0 as builder
 
 ADD . /antora/
 
