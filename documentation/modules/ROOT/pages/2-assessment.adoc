@@ -11,7 +11,7 @@ The goal of this lab is to assess the siloed current application portfolio and i
 
 To start the assessment of the existing applications we will use the https://www.konveyor.io/tools/tackle[Tackle^] Application Assessment tool in the https://www.konveyor.io[Konveyor^] community to move our applications. We will use _Tackle_ to assess the `Customers` service based on the _Tomcat_ server on Red Hat Virtualization.
 
-Open a new browser to access the https://tackle-tackle-%USERID%.apps.%SUBDOMAIN%[Tackle web console^].
+Open a new browser to access the https://tackle-tackle-%USERID%.%SUBDOMAIN%[Tackle web console^].
 
 You will see existing application inventories such as *Customers*, *Orders*, *Inventory*, and more.
 

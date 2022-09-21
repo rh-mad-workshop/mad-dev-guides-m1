@@ -84,7 +84,7 @@ Visual Studio (VS) Code Servers are already deployed in the OpenShift cluster to
 
 This makes it easy to change any source code and configuration files in the cloned repository.
 
-To get started, access the link:https://codeserver-codeserver-%USERID%.apps.%SUBDOMAIN%[VS Code server instance^] and log in using the following `password`.
+To get started, access the link:https://codeserver-codeserver-%USERID%.%SUBDOMAIN%[VS Code server instance^] and log in using the following `password`.
 
 * Password: `{openshift-password}`
 
@@ -127,7 +127,7 @@ The output should look like:
 [source,bash,subs="+attributes,macros+"]
 ----
 NAME             HOST/PORT                                                                PATH   SERVICES         PORT   TERMINATION     WILDCARD
-ordersfrontend   ordersfrontend-retail-%USERID%.apps.%SUBDOMAIN%          ordersfrontend   web    edge/Redirect   None
+ordersfrontend   ordersfrontend-retail-%USERID%.%SUBDOMAIN%          ordersfrontend   web    edge/Redirect   None
 ----
 
 Navigate to the orders frontend route. You can use either _https_ or _http_ (which will be redirected to _https_).
