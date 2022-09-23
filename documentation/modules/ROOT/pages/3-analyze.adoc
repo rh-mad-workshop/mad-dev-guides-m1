@@ -86,7 +86,7 @@ image::upload-success.png[upload-success]
 
 === 3.1.2. Set targets
 
-You will now be presented with options for transformation targets. You need to focus on containerizing the application since this is going to be a linux container, it makes sense to do a sanity check to avoid and Windows paths might remain in the code from previous iterations. We also going to investigate removing reliance on proprietary JDK licenses, so we going to select OpenJDK as a target.
+You will now be presented with options for transformation targets. You need to focus on containerizing the application since this is going to be a linux container, it makes sense to do a sanity check to avoid and Windows paths might remain in code from previous iterations. We also going to investigate removing reliance on proprietary JDK licenses, so we going to select OpenJDK as a target.
 
 Click on `Containers`, `Linux`, and `OpenJDK` as the targets.
 
