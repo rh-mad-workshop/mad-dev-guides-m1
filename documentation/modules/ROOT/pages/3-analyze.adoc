@@ -112,6 +112,11 @@ Click on `Add Rule` to upload a custom rule (`corporate-framework-config.windup.
 
 Drag and drop the file or upload it from your local file system.
 
+[NOTE]
+====
+If you use a MacOS to upload the `.windup.xml` file, you should drag and drop the file rather than choosing the file on the popup file explorer.
+====
+
 image::upload-custom-rule.png[upload-custom-rule]
 
 Click on `Add`. Make sure if the custom rule is added. Click on `Next`.
