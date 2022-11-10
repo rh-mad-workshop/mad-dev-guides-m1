@@ -44,7 +44,7 @@ The problem right now is the *customers* service:
 * The customers service uses an old Java code base running on `Apache Tomcat` in a VM on `Red Hat Virtualization`. In this module you will assess and analyze the legacy Java application (customers) to learn the way you can modernize the Java code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.
 * The customers database is using an `Oracle database` running as a VM in Red Hat Virtualization. Because this is Oracle you can not deploy the database as a Pod on OpenShift - therefore you will have a new virtual machine based on `OpenShift Virtualization` migrated by the `OpenShift Migration Toolkit for Virtualization`.
 
-When you have finished the all modules in Dev track, your TO-BE deployment architecture should look like this:
+When you have finished the all of the modules in Dev track, your TO-BE deployment architecture should look like this:
 
 image::architecture_completed.png[architecture_completed]
 

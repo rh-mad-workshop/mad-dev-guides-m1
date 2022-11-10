@@ -3,7 +3,7 @@
 
 == Goals of this lab
 
-As you have realized in the previous *assessment* lab, you need to analyze the legacy applications in terms of identifying actual code of lines for the modernization issues as well as estimating time and effort for the modernization project.
+As you have realized in the previous *assessment* lab, you need to analyze the legacy applications in terms of identifying the actual line of code for the modernization issues as well as estimating time and effort for the modernization project.
 
 // The goal is to analyze the _customers_ application by scanning all source code and properties using the https://developers.redhat.com/products/mta/overview[Migration Toolkit for Applications^] (MTA) tool. Then, you'll understand how to get started with the code modification along with the analysis report.
 
@@ -30,6 +30,20 @@ Read more about it in the https://konveyor.github.io/tackle/tackle2/assessanalyz
 // == 3.1. Create a New Project in MTA Web Console
 == 3.1. Analyze Customers Application using Tackle
 
+First, you need to _download_ or _git clone_ the `modern-app-dev` from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. 
+
+image::gitea-repo.png[gitea-repo]
+
+[NOTE]
+====
+You can also log in to the Gitea repository with the following credentials.
+
+* Username - `%USERID%`
+* Password - `{openshift-password}`
+====
+
+Once you download or clone the project to your local file system, explore if the `customers-tomcat.war` file exists in the *packages-mta* folder.
+
 Go back to the `Application inventory` page in Tackle web console. 
 
 When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
@@ -55,22 +69,6 @@ image::application-analysis.png[application-analysis]
 
 === 3.1.1. Analysis mode
 
-First, you need to _download_ or _git clone_ the `app-mod-project` from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. 
-
-image::gitea-repo.png[gitea-repo]
-
-[NOTE]
-====
-You can also log in to the Gitea repository with the following credentials.
-
-* Username - `%USERID%`
-* Password - `{openshift-password}`
-====
-
-Once you download or clone the project to your local file system, explore if the `customers-tomcat.war` file exists in the *packages-mta* folder.
-
-Go back to the Tackle web console.
-
 Select `Upload local binary` in Analysis mode popup. Then, drag and drop the *customers-tomcat.war* file or Upload it from your local file system.
 
 image::add-applications.png[Add applications]
@@ -79,7 +77,7 @@ Click on `Next`.
 
 [NOTE]
 ====
-Please make sure to see following success popup message on the right top. It probably will take a few seconds to complete uploading the binary file. 
+Please make sure to see the following success popup message on the right top. It probably will take a few seconds to complete uploading the binary file. 
 
 image::upload-success.png[upload-success]
 ====
@@ -191,7 +189,7 @@ Click on the `io.konveyor.demo.ordermanagement.config.PersistenceConfig` file.
 
 image::report-code.png[report code]
 
-You can now see exactly where the issue is located in the source code.  But you are still using a web environment.  You could check these reports for the changes, but that's not practical.  Because of that you developed a series of plugins for the most popular IDEs to make the like of the developer easier.
+You can now see exactly where the issue is located in the source code. But you are still using a web environment.
 
 == Summary
 

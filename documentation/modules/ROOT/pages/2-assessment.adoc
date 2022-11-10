@@ -5,11 +5,11 @@
 
 As part of the `Globex`’s digital transformation and cloud adoption initiative, the development and devops teams embarked upon a journey to modernize their existing siloed services running on the virtual machines on Red Hat Virtualization and containerized applications on Red Hat OpenShift separately.
 
-The goal of this lab is to assess the siloed current application portfolio and identify potential issues and risks to implementing advanced cloud-native architecture with application modernization.
+The goal of this lab is to assess the siloed current application portfolio and identify potential issues and risks to implement advanced cloud-native architecture with application modernization.
 
 == 2.1. Access the Tackle Web Console
 
-To start the assessment of the existing applications we will use the https://www.konveyor.io/tools/tackle[Tackle^] Application Assessment tool in the https://www.konveyor.io[Konveyor^] community to move our applications. We will use _Tackle_ to assess the `Customers` service based on the _Tomcat_ server on Red Hat Virtualization.
+To start the assessment of the existing applications we will use the https://www.konveyor.io/tools/tackle[Tackle^] in the https://www.konveyor.io[Konveyor^] community. We will use _Tackle_ to assess the `Customers` service based on the _Tomcat_ server on Red Hat Virtualization.
 
 Open a new browser to access the https://tackle-tackle-%USERID%.%SUBDOMAIN%[Tackle web console^].
 
@@ -88,7 +88,7 @@ When you see *This application has already been assessed. Do you want to continu
 
 image::edit-assessment.png[edit-assessment]
 
-First step will be to select the stakeholders (_Homer Simpson_) and Stakeholder groups (_Retail Management_) involved with the assessment. Leave the default values.
+The first step will be to select the stakeholders (_Homer Simpson_) and Stakeholder groups (_Retail Management_) involved with the assessment. Leave the default values.
 
 image::select-stakeholder.png[select-stakeholder]
 
