@@ -62,7 +62,7 @@ Go to `Application inventory` on the left menu and click on `pencil` icon for th
 
 image::app-inventory-landing.png[app-inventory-landing]
 
-When you click on `2 mores` button, it shows 5 tags.
+When you click on `2 more` button, it shows 5 tags.
 
 * Oracle
 * Java
