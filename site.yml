@@ -3,7 +3,6 @@ runtime:
 
 site:
   title: Modern Application Development Roadshow - Dev Track
-  # url:
   start_page: mad-dev-guides-m1::1-introduction.adoc
 
 content:
