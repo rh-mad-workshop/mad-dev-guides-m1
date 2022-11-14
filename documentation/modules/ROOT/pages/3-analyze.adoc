@@ -3,22 +3,25 @@
 
 == Goals of this lab
 
-As you have realized in the previous *assessment* lab, you need to analyze the legacy applications in terms of identifying the actual line of code for the modernization issues as well as estimating time and effort for the modernization project.
+As you have realized in the previous *assessment* exercise, you need to analyze the legacy applications in terms of identifying the actual lines of code for the modernization issues as well as estimating time and effort for the modernization project.
 
 // The goal is to analyze the _customers_ application by scanning all source code and properties using the https://developers.redhat.com/products/mta/overview[Migration Toolkit for Applications^] (MTA) tool. Then, you'll understand how to get started with the code modification along with the analysis report.
 
-The goal of this lab is to analyze the _customers_ application by scanning all source code and properties using the `Analysis` in the Tackle tool. Then, you'll understand how to get started with the code modification along with the analysis report.
+The goal of this exercise is to analyze the _customers_ application by scanning its source code and properties using the `Analysis` capability in  Tackle. Then you'll review the analysis report and get started with the actual code modification.
 
 // Migration Toolkit for Applications (MTA) is an extensible and customizable rule-based tool that helps simplify migration of Java applications.
 
 // image::mta-logo.png[mta-logo]
 
 // MTA is also used by organizations for:
-Tackle Analysis is also used by organizations for:
+Tackle _Analysis_ is used by organizations for:
 
 * Planning and work estimation
 * Identifying migration issues and providing solutions
 * Detailed reporting
+
+And has several capabilities such as:
+
 * Built-in rules and migration paths
 * Rule extensibility and customization
 * Ability to analyze source code or application archives
@@ -30,7 +33,7 @@ Read more about it in the https://konveyor.github.io/tackle/tackle2/assessanalyz
 // == 3.1. Create a New Project in MTA Web Console
 == 3.1. Analyze Customers Application using Tackle
 
-First, you need to _download_ or _git clone_ the `modern-app-dev` from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. 
+First, you need to _download_ or _git clone_ the `modern-app-dev` repository to your local system from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. If you've used GitHub before, the Gitea interface will be very familiar:
 
 image::gitea-repo.png[gitea-repo]
 
@@ -42,9 +45,9 @@ You can also log in to the Gitea repository with the following credentials.
 * Password - `{openshift-password}`
 ====
 
-Once you download or clone the project to your local file system, explore if the `customers-tomcat.war` file exists in the *packages-mta* folder.
+Once you download or clone the project to your local file system, extract it and check that the `customers-tomcat.war` file exists in the *packages-mta* folder. This is the file you will upload to Tackle to begin the analysis.
 
-Go back to the `Application inventory` page in Tackle web console. 
+Go back to the `Application inventory` page in Tackle web console.
 
 When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
 
@@ -77,14 +80,16 @@ Click on `Next`.
 
 [NOTE]
 ====
-Please make sure to see the following success popup message on the right top. It probably will take a few seconds to complete uploading the binary file. 
+Please make sure to see the following success popup message on the upper right of your screen after the upload completes. It probably will take a few seconds to complete the upload.
 
 image::upload-success.png[upload-success]
 ====
 
 === 3.1.2. Set targets
 
-You will now be presented with options for transformation targets. You need to focus on containerizing the application since this is going to be a linux container, it makes sense to do a sanity check to avoid and Windows paths might remain in code from previous iterations. We also going to investigate removing reliance on proprietary JDK licenses, so we going to select OpenJDK as a target.
+You will now be presented with options for transformation targets. Here we will select several targets based on the technologies we are moving to:
+
+Since this is going to be a linux container, it makes sense to do a sanity check to avoid things like Windows filesystem paths and other non-container- or non-Linux-friendly issues. We also going to investigate removing our reliance on a proprietary JDK distribution, so we going to select OpenJDK as a target.
 
 Click on `Containers`, `Linux`, and `OpenJDK` as the targets.
 
@@ -104,7 +109,7 @@ You will now be presented with options for custom rules.
 
 image::custom-rules.png[Custom rules]
 
-Tackle Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used on the analysis. We've provided some custom rules which will detect the usage of a specific library and make suggestions for changes to be performed to remove it.
+Tackle Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used as part of the analysis. We've provided some custom rules which will detect the usage of a specific library that we know has been used at Globex in the past and make suggestions for changes to be performed to remove it.
 
 Click on `Add Rule` to upload a custom rule (`corporate-framework-config.windup.xml`) in the *customrules* directory that you have already downloaded in your file system.
 
@@ -117,29 +122,29 @@ If you use a MacOS to upload the `.windup.xml` file, you should drag and drop th
 
 image::upload-custom-rule.png[upload-custom-rule]
 
-Click on `Add`. Make sure if the custom rule is added. Click on `Next`.
+Click on `Add`. Make sure the custom rule is added. Click on `Next`.
 
 image::enable-custom-rule.png[enable-custom-rule]
 
-Then, you will now be presented with options to fine tune the analysis, for the moment we will stick with the default options.
+Next, you will be presented with options to fine tune the analysis. For now we will stick with the default options.
 
 image::fine-tune.png[Fine tuning]
 
 Click on `Next`.
 
-Lastly, we are presented with a summary of the configuration for our analysis. 
+Lastly, we are presented with a summary of the configuration for our analysis.
 
 image::finish-project.png[Finish project]
 
 Click on `Run`.
 
-Now the analysis has been scheduled, and once it is finished you will be able to access the reports. Stay on this view until the analysis is finished.
+The analysis begins, and once it is finished you will be able to access the reports. Stay on this view until the analysis is finished.
 
-Unfold the customers application. Then click on `Report`.
+Once it finises, expand the customers application using the caret on the left. Then click on `Report`.
 
 [NOTE]
 ====
-The analysis will take a few minutes to pull the Windup image and execute the application analysis. 
+The analysis may take a few minutes as it must pull container images for Windup before executing the analysis.
 ====
 
 image::active-analysis.png[Active analysis]
@@ -165,11 +170,11 @@ image::report-dashboard.png[report dashboard]
 
 Click on the `Issues` tab.
 
-This view shows us the list of issues that prevent an application to run on the target runtime. We can see that the application has a few mandatory issues that need to be addressed.
+This view shows us the list of issues that could prevent an application to successfully run on the target runtime. We can see that the application has a few mandatory issues that need to be addressed.
 
 Click on `Hard coded IP address`.
 
-By choosing the issue we can see where it was detected and view a hint on how to solve it.  It looks like the config files are pointing to some static IPs.
+By choosing the issue we can see where it was detected and view a hint on how to solve it.  It looks like the config files are pointing to some static IPs. That's not good in a cloud / container environment!
 
 image::report-hint.png[report hint]
 
@@ -185,12 +190,12 @@ It looks like the custom rule got triggered and found some issues with the sourc
 
 image::report-hint-custom.png[report hint custom rule]
 
-Click on the `io.konveyor.demo.ordermanagement.config.PersistenceConfig` file. 
+Click on the `io.konveyor.demo.ordermanagement.config.PersistenceConfig` file.
 
 image::report-code.png[report code]
 
-You can now see exactly where the issue is located in the source code. But you are still using a web environment.
+You can now see exactly where the issue is located in the source code.
 
 == Summary
 
-You have now successfully analyzed the legacy application to learn what migration issues you have. You'll refactor the application to fix the issues using the VS Code server in `module 2`. Then, you'll also deploy the modernized application quickly to Red Hat OpenShift.
+You have now successfully analyzed the legacy application to learn what migration issues you have. You'll refactor the application to fix the issues in the next module. Then, you'll deploy the modernized application to Red Hat OpenShift. Let's go!
