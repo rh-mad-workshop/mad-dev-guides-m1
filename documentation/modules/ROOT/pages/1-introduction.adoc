@@ -11,11 +11,11 @@ image::app-mod-approach.png[Modernization Approach]
 
 This module will walk you through 2 of the phases (_Assess_, _Rationalize_) as following steps:
 
-* Assessment and Analysis of the legacy application using https://www.konveyor.io/tools/tackle/[Konveyor Tackle^]
+* Assessment and Analysis of the legacy application using https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/6.0/html-single/introduction_to_the_migration_toolkit_for_applications/index[Migration Toolkit for Applications (MTA)^]
 
 [NOTE]
 ====
-We'll replace _Tackle_ with *Migration Toolkit for Applications (MTA) 6.x* that will build on _Tackle_ and _PathFinder_ to provide application assessment and analysis features in the future.
+Migration Toolkit for Applications (MTA) accelerates large-scale application modernization efforts across hybrid cloud environments on Red Hat OpenShift. This solution provides insight throughout the adoption process, at both the portfolio and application levels: inventory, assess, analyze, and manage applications for faster migration to OpenShift via the user interface.
 ====
 
 == 1.1. Understand the Globex Retail System Architecture
@@ -76,7 +76,7 @@ Your OpenShift cluster is already configured with everything you need. Here are 
 * `Migration Toolkit for Virtualization` to facilitate the migration of the Oracle VM from Red Hat Virtualization to Red Hat OpenShift Container Platform)
 * `OpenShift GitOps` to manage the deployed services using a GitOps approach through ArgoCD
 * `OpenShift Pipelines` to build the customer application from source code and deploy to the `retail` project using GitOps
-* `Migration Toolkit for Applications (Tackle)` to help modernize the customer service Java source code.
+* `Migration Toolkit for Applications` to help modernize the customer service Java source code.
 
 === 1.2.3. Visual Studio Code Server
 
