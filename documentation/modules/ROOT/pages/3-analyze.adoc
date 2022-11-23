@@ -5,16 +5,9 @@
 
 As you have realized in the previous *assessment* exercise, you need to analyze the legacy applications in terms of identifying the actual lines of code for the modernization issues as well as estimating time and effort for the modernization project.
 
-// The goal is to analyze the _customers_ application by scanning all source code and properties using the https://developers.redhat.com/products/mta/overview[Migration Toolkit for Applications^] (MTA) tool. Then, you'll understand how to get started with the code modification along with the analysis report.
+The goal of this exercise is to analyze the _customers_ application by scanning its source code and properties using the `Analysis` capability in MTA. Then you'll review the analysis report and get started with the actual code modification.
 
-The goal of this exercise is to analyze the _customers_ application by scanning its source code and properties using the `Analysis` capability in  Tackle. Then you'll review the analysis report and get started with the actual code modification.
-
-// Migration Toolkit for Applications (MTA) is an extensible and customizable rule-based tool that helps simplify migration of Java applications.
-
-// image::mta-logo.png[mta-logo]
-
-// MTA is also used by organizations for:
-Tackle _Analysis_ is used by organizations for:
+MTA _Analysis_ is used by organizations for:
 
 * Planning and work estimation
 * Identifying migration issues and providing solutions
@@ -26,12 +19,9 @@ And has several capabilities such as:
 * Rule extensibility and customization
 * Ability to analyze source code or application archives
 
-// Read more about it in the https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/5.3[MTA documentation^]
+Read more about it in the https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/6.0/html-single/introduction_to_the_migration_toolkit_for_applications/index#new-mta-features_getting-started-guide[MTA Features]
 
-Read more about it in the https://konveyor.github.io/tackle/tackle2/assessanalyze/[Tackle 2.0 documentation]
-
-// == 3.1. Create a New Project in MTA Web Console
-== 3.1. Analyze Customers Application using Tackle
+== 3.1. Analyze Customers Application using MTA
 
 First, you need to _download_ or _git clone_ the `modern-app-dev` repository to your local system from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. If you've used GitHub before, the Gitea interface will be very familiar:
 
@@ -45,30 +35,13 @@ You can also log in to the Gitea repository with the following credentials.
 * Password - `{openshift-password}`
 ====
 
-Once you download or clone the project to your local file system, extract it and check that the `customers-tomcat.war` file exists in the *packages-mta* folder. This is the file you will upload to Tackle to begin the analysis.
+Once you download or clone the project to your local file system, extract it and check that the `customers-tomcat.war` file exists in the *packages-mta* folder. This is the file you will upload to MTA to begin the analysis.
 
-Go back to the `Application inventory` page in Tackle web console.
+Go back to the `Application inventory` page in MTA web console.
 
 When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
 
 image::application-analysis.png[application-analysis]
-
-// * Username or email: `mta`
-// * Password: `{openshift-password}`
-
-// image::mta-login.png[mta-login]
-
-// Click on `Create project`.
-
-// image::mta-1.png[MTA landing page]
-
-// Enter a project name as shown below.
-
-// * Name: `Customers Service`
-
-// image::create-project.png[Create project]
-
-// Click on `Next`.
 
 === 3.1.1. Analysis mode
 
@@ -109,7 +82,7 @@ You will now be presented with options for custom rules.
 
 image::custom-rules.png[Custom rules]
 
-Tackle Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used as part of the analysis. We've provided some custom rules which will detect the usage of a specific library that we know has been used at Globex in the past and make suggestions for changes to be performed to remove it.
+MTA Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used as part of the analysis. We've provided some custom rules which will detect the usage of a specific library that we know has been used at Globex in the past and make suggestions for changes to be performed to remove it.
 
 Click on `Add Rule` to upload a custom rule (`corporate-framework-config.windup.xml`) in the *customrules* directory that you have already downloaded in your file system.
 
