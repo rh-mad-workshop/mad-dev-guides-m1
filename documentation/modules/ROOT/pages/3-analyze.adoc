@@ -113,7 +113,7 @@ Click on `Run`.
 
 The analysis begins, and once it is finished you will be able to access the reports. Stay on this view until the analysis is finished.
 
-Once it finises, expand the customers application using the caret on the left. Then click on `Report`.
+Once it finishes, expand the customers application using the caret on the left. Then click on `Report`.
 
 [NOTE]
 ====
