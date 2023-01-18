@@ -37,7 +37,7 @@ You can also log in to the Gitea repository with the following credentials.
 
 Once you download or clone the project to your local file system, extract it and check that the `customers-tomcat.war` file exists in the *packages-mta* folder. This is the file you will upload to MTA to begin the analysis.
 
-Go back to the `Application inventory` page in MTA web console.
+Go back to the `Application inventory` page in MTA web console. Select the `Analysis` tab.
 
 When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
 
