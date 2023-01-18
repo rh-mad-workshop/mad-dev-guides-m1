@@ -66,6 +66,11 @@ Since this is going to be a linux container, it makes sense to do a sanity check
 
 Click on `Containers`, `Linux`, and `OpenJDK` as the targets.
 
+[NOTE]
+====
+If the`OpenJDK 11` tile is already selected by default, you need to unselect it and select the `OpenJDK`.
+====
+
 image::configure-analysis-checked.png[Configure Analysis]
 
 Click on `Next`.
