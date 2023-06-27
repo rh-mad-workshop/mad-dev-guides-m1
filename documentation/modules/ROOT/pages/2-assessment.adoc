@@ -74,7 +74,7 @@ When you click on `2 more` button, it shows 5 tags.
 
 Click on `Cancel`.
 
-=== 2.3.2. Access the Legacy Customers Application
+=== 2.3.2. Assess the Legacy Customers Application
 
 The assessment is driven by a questionnaire and aims to determine the suitability for containerization for each application. It covers all the different areas of the *application landscape*, including the *technology*, *application lifecycle management*, and *operations*. This questionnaire allow the tool to identify and present potential risks that might prevent the application from running in containers or would require extra steps to mitigate the risk.
 
