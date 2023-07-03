@@ -23,9 +23,11 @@ Read more about it in the https://access.redhat.com/documentation/en-us/migratio
 
 == 3.1. Analyze Customers Application using MTA
 
-First, you need to _download_ or _git clone_ the `modern-app-dev` repository to your local system from your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^]. If you've used GitHub before, the Gitea interface will be very familiar:
+First, you need to configure *Git repositories* to refer to your link:https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev[Gitea repository^] when you analyze your inventory and applications using MTA.
 
-image::gitea-repo.png[gitea-repo]
+In *Administration* view, select *Repositories > Git*. `Toggle` the *Consume insecure Git repositories* switch to the right.
+
+image::mta-admin-git.png[admin git]
 
 [NOTE]
 ====
@@ -35,17 +37,26 @@ You can also log in to the Gitea repository with the following credentials.
 * Password - `{openshift-password}`
 ====
 
-Once you download or clone the project to your local file system, extract it and check that the `customers-tomcat.war` file exists in the *packages-mta* folder. This is the file you will upload to MTA to begin the analysis.
+Go back to the `Application inventory` page in the *Migration* perspective. Click on pencil (edit) icon for the customers inventory.
 
-Go back to the `Application inventory` page in MTA web console. Select the `Analysis` tab.
+Update application with the following source code information.
 
-When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
+* Repository type - `Git`
+* Source Repository - `https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev.git`
+* Branch - `main`
+* Root path - `package-legacy`
+
+image::application-update-git.png[application-update-git]
+
+Select `Save`.
+
+Select the `Analysis` tab. When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
 
 image::application-analysis.png[application-analysis]
 
 === 3.1.1. Analysis mode
 
-Select `Upload local binary` in Analysis mode popup. Then, drag and drop the *customers-tomcat.war* file or Upload it from your local file system.
+Select `Source dode` in Analysis mode popup.
 
 image::add-applications.png[Add applications]
 
@@ -53,9 +64,7 @@ Click on `Next`.
 
 [NOTE]
 ====
-Please make sure to see the following success popup message on the upper right of your screen after the upload completes. It probably will take a few seconds to complete the upload.
-
-image::upload-success.png[upload-success]
+We'll analyze a prebuilt WAR file rather than the *customers-tomcat-legacy* directory because the MTA doesn't support selecting multiple root paths in the Git repository. The existing "customers" application depends on the external configuration that stores in the *config-utils* directory.
 ====
 
 === 3.1.2. Set targets
@@ -84,20 +93,19 @@ image::custom-rules.png[Custom rules]
 
 MTA Analysis uses a custom rule engine for the analysis. It comes with many rules out of the box to support the different migration paths, but it can be extended. Custom rules can be developed with a very simple XML syntax and used as part of the analysis. We've provided some custom rules which will detect the usage of a specific library that we know has been used at Globex in the past and make suggestions for changes to be performed to remove it.
 
-Click on `Add Rule` to upload a custom rule (`corporate-framework-config.windup.xml`) in the *customrules* directory that you have already downloaded in your file system.
+Select `Repository` tab to refer to a custom rule (`corporate-framework-config.windup.xml`) in the *customrules* directory of your Gitea repository.
 
-Drag and drop the file or upload it from your local file system.
+Key in the following information in the repository page.
 
-[NOTE]
-====
-If you use a MacOS to upload the `.windup.xml` file, you should drag and drop the file rather than choosing the file on the popup file explorer.
-====
+* Repository type - `Git`
+* Source Repository - `https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev.git`
+* Branch - `main`
+* Root path - `customrules`
+* Associated credentials - `None`
 
-image::upload-custom-rule.png[upload-custom-rule]
+image::add-repository-customrules.png[add-repository-customrules]
 
-Click on `Add`. Make sure the custom rule is added. Click on `Next`.
-
-image::enable-custom-rule.png[enable-custom-rule]
+Click on `Next`.
 
 Next, you will be presented with options to fine tune the analysis. For now we will stick with the default options.
 
@@ -113,7 +121,7 @@ Click on `Run`.
 
 The analysis begins, and once it is finished you will be able to access the reports. Stay on this view until the analysis is finished.
 
-Once it finishes, expand the customers application using the caret on the left. Then click on `Report`.
+Once it finishes, select *Customers* application. Then click on `Report` in the *Reports* tab on the right.
 
 [NOTE]
 ====
