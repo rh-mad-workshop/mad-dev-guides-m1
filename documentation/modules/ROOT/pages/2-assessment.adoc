@@ -80,7 +80,7 @@ The assessment is driven by a questionnaire and aims to determine the suitabilit
 
 One stakeholder team has already assessed the retail service to identify technical problems. However, they couldn't answer the configuration model questions during the first assessment. So they just left the answer as `Unknown` at that time.
 
-Today, you'll run the *second* assessment to choose the proper answer in the `cross-cutting concerns` section for the _customers_ application.
+Today, you'll run the *second* assessment to choose the proper answer in the `cross-cutting concerns` section for the _customers_ application. 
 
 Click on `Assess`.
 
