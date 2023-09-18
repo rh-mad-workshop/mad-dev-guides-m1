@@ -62,11 +62,6 @@ image::add-applications.png[Add applications]
 
 Click on `Next`.
 
-[NOTE]
-====
-We'll analyze a prebuilt WAR file rather than the *customers-tomcat-legacy* directory because the MTA doesn't support selecting multiple root paths in the Git repository. The existing "customers" application depends on the external configuration that stores in the *config-utils* directory.
-====
-
 === 3.1.2. Set targets
 
 You will now be presented with options for transformation targets. Here we will select several targets based on the technologies we are moving to:

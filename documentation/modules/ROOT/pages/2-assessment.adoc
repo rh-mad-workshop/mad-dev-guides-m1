@@ -129,7 +129,7 @@ Now that we know we will need changes in the source code to adapt the applicatio
 * Proposed action: `Refactor`
 * Effort estimate: `Small`
 
-Since this is a key application in the architecture, we're going to set the criticality and priority to `10`.
+Since this is a key application in the architecture, we're going to set the criticality to `10` and priority to `9`.
 
 * Business criticality: `10`
 * Work priority: `9`
