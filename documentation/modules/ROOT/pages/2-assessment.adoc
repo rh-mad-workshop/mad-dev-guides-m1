@@ -30,6 +30,10 @@ image::application-inventory.png[application inventory]
 * A prioritized list of associated risks (based on answers to the questionnaire)
 * An Adoption plan with the application's prioritization, business criticality and dependencies.
 
+**Migration Waves management** is a small collection of workloads that deliver business value. MTA’s Migration Wave groups applications to be migrated on a specified schedule. In addition, a migration wave enables you to export a list of the wave’s applications to the Jira issue management system. This automatically creates a separate Jira issue for each application of the migration wave for tracking.
+
+For more information, see https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/6.2/html/user_interface_guide/working-with-applications-in-the-ui#mta-web-creating-migration-waves_user-interface-guide[Creating migration waves^] and https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/6.2/html/user_interface_guide/working-with-applications-in-the-ui#mta-web-creating-jira-issues-for-migration-wave_user-interface-guide[Creating Jira issues for a migration wave^].
+
 == 2.2. Controls
 
 *Controls* are a collection of entities that add value to Application Inventory and the Pathfinder assessment. They comprise _business services_, _stakeholders_, _stakeholder groups_, _job functions_, _tag types_, and _tags_.
