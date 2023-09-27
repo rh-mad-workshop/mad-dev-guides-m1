@@ -48,7 +48,7 @@ Update application with the following source code information.
 
 image::application-update-git.png[application-update-git]
 
-Select `Save`.
+Click on `Save`.
 
 Select the `Analysis` tab. When you click on the `Customers` application, `Analyze` button will be enabled. Then, click on *Analyze*.
 

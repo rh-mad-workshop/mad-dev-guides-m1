@@ -146,7 +146,7 @@ At this point you have completed the 2nd assessment to update the `Application c
 
 image::complete-review.png[complete-review]
 
-Go to `Report` on the left menu. There you will br able to access the report details such as _Current landscape_, _Adoption candidate distribution_, _Suggested adoption plan_, and _Identified risks_.
+Go to `Report` on the left menu. There you will be able to access the report details such as _Current landscape_, _Adoption candidate distribution_, _Suggested adoption plan_, and _Identified risks_.
 
 image::report-review.png[report-review]
 
