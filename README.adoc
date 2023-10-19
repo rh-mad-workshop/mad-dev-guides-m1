@@ -1,8 +1,8 @@
-# Modern Application Development Dev Track - Module 1
+# Modern Application Development Dev Track - Module CHS: Migration to EAP
 :experimental:
 :imagesdir: documentation/modules/ROOT/assets/images
 
-// image::https://github.com/danieloh30/mad-dev-m1-guides/workflows/docs/badge.svg[docs]
+// image::https://github.com/danieloh30/mad-dev-mono2micro-guides/workflows/docs/badge.svg[docs]
 
 ## Overview
 
@@ -35,10 +35,10 @@ image::app-mod-report-2022.png[app-mod-report-2022]
 
 ## Technology Stack
 
-* Red Hat Enterprise Virtualization
-* Red Hat Application Runtimes (Quarkus, Spring Boot, Node.js, Tomcat)
-* Red Hat OpenShift (Pipeline, GitOps, Virtualization)
-* Oracle Database and PostgreSQL
+* Red Hat Runtimes (JBoss EAP, JBoss Web Server, Quarkus, Spring Boot, Node.js)
+* Red Hat OpenShift (Pipeline, GitOps, Virtualization, Serverless, Service Mesh)
+* Red Hat Dev Spaces
+* PostgreSQL
 
 ## Documentation
 
@@ -68,20 +68,18 @@ Here's the list of all query params used (they are all optional, but generated l
 
 Example [Dev Mode]:
 
-http://localhost:3000/mad-dev-guides-m1/main/1-introduction.html?USERID=user1&SUBDOMAIN=cluster-8s5ss.sandbox701.opentlc.com&TOMCATIP=150.240.99.53
+http://localhost:3000/mad-dev-guides-mono2micro/main/1-introduction.html?USERID=user1&SUBDOMAIN=cluster-8s5ss.sandbox701.opentlc.com&TOMCATIP=150.240.99.53
 
 ## Deploy to OpenShift
 
 [.console-input]
 [source,bash]
 ----
-oc new-app  https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-m1.git --strategy=docker
+oc new-app  https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-mono2micro.git --strategy=docker
 
-oc create route edge mad-dev-guides-m1 --service=mad-dev-guides-m1
+oc create route edge mad-dev-guides-mono2micro --service=mad-dev-guides-mono2micro
 ----
 
 ## Contributing
 
 Please refer to the link:CONTRIBUTING.adoc#contributing-guide[how to contribute] on how you can contribute to the tutorial.
-
- 

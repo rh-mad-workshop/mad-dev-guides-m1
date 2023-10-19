@@ -4,7 +4,7 @@ runtime:
 site:
   title: Modern Application Development Roadshow - Dev Track
   url: http://localhost:3000
-  start_page: mad-dev-guides-m1::1-introduction.adoc
+  start_page: mad-dev-guides-mono2micro::1-introduction.adoc
 content:
   sources:
     - url: .

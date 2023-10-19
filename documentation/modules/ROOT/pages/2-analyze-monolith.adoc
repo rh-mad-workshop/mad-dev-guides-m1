@@ -1,0 +1,159 @@
+= 2. Analyze Monolith - 25 minutes
+:imagesdir: ../assets/images
+
+In this module you’ll work with an existing Java EE application designed for a retail webshop.  The current
+version of the webshop is a Java EE application built for Oracle Weblogic Application Server. As part of a modernization
+strategy you've decided to move this application to JBoss EAP, containerize it, and run it on a Kubernetes platform with OpenShift.
+
+=== What is Migration Toolkit for Applications?
+
+image::mta_icon.png[MTA Logo, 300]
+
+Migration Toolkit for Applications (MTA) is an extensible and customizable rule-based tool that helps simplify migration of Java applications.
+
+It is used by organizations for:
+
+* Planning and work estimation
+* Identifying migration issues and providing solutions
+* Detailed reporting
+* Built-in rules and migration paths
+* Rule extensibility and customization
+* Ability to analyze source code or application archives
+
+Read more about it in the https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/[MTA documentation^]
+
+== 2.1. Analyze app using MTA IDE Plugin
+
+In this step we will analyze a monolithic application built for use with Oracle WebLogic Server (WLS). This application is a Java
+EE application using a number of different technologies, including standard Java EE APIs as well as proprietary Weblogic APIs and
+best practices.
+
+For this lab, we will use the MTA https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/6.1/html-single/visual_studio_code_extension_guide/index[Visual Studio Code Extension^] based on Red Hat OpenShift Dev Spaces.
+
+The IDE Plugin for the Migration Toolkit for Applications provides assistance directly in Eclipse and Red Hat OpenShift Dev Spaces for developers making changes for a migration or modernization effort. It analyzes your projects using MTA, marks migration issues in the source code, provides guidance to fix the issues, and offers automatic code replacement when possible.
+
+== 2.2. Access Your Development Environment
+
+You will be using Visual Studio Code (VS Code) based on https://developers.redhat.com/products/openshift-dev-spaces/overview[Red Hat OpenShift Dev Spaces^]. **Changes to files are auto-saved every few seconds**, so you don't need to explicitly save changes.
+
+To get started, {{ DS_URL }}[access the Red Hat OpenShift Dev Spaces instance^] and select *Log in with OpenShift* button:
+
+image::login_with_openshift.png[login,800]
+
+Type in the following credentail:
+
+* *Username*: `{{ USER_ID }}`
+* *Password*: `{{ DS_USER_PASSWORD }}`
+
+image::che-login.png[login,800]
+
+[NOTE]
+====
+In case you see the *Authorize Access* page as below, select *Allow selected permissions* button.
+
+image::auth-access.png[auth-access, 800]
+====
+
+Once you log in, you’ll be placed on the *Create Workspace* dashboard. Copy the following `Git Repo URL` and select `Create & Open`.
+
+* *Git Repo URL*: `https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m1-labs/tree/ocp-4.13`
+
+image::ds-landing.png[ds, 800]
+
+A new window or tab in your web browser will open automatically to showcase the progess about *Starting workspace quarkus-workshop*. It takes about *60* seconds to finish the process.
+
+image::starting-workspace.png[ds, 800]
+
+[NOTE]
+====
+In case you see this information page, select `Start your workspace` to continue  using your workspace.
+
+image::starting-workspace-info.png[ds, 800]
+====
+
+After a few seconds, you’ll be placed in the workspace.
+
+image::ds-workspace.png[ds, 800]
+
+[NOTE]
+====
+In case you see this infomation page, check on `Trust the authors of all files in the parent folder 'projects'`. Then, select `Yes, I trust the authors.
+
+image::ds-trust-popup.png[ds, 800]
+====
+
+You'll use all of these during the course of this workshop, so keep this browser tab open throughout. **If things get weird, you can simply reload the browser tab to refresh the view.**
+
+== 2.3. Use the configuration editor to setup the analysis
+
+Click on `MTA Explorer` icon on the left. Then, a new MTA configuration will be shown up:
+
+image::mta_newconf.png[MTA Landing Page, 700]
+
+[NOTE]
+====
+In case you see this popup, select `Download` button to download the windup command line tool into your VS Code server.
+
+image::ds-windup-cli.png[ds, 800]
+====
+
+To input source files and directories, click on `Add` then select `Open File Explorer`:
+
+Note that you might need to remove an existing input directory.
+
+image::mta-add-input.png[MTA Add App, 700]
+
+Open `projects > cloud-native-workshop-v2m1-labs` then select `monolith` directory. Click on `Choose...`:
+
+image::mta-add-opendir.png[MTA Add App, 700]
+
+Then you will see that */projects/cloud-native-workshop-v2m1-labs/monoilth* directory is added in _--input_ configuration.
+
+Be sure that `eap7` is already selected in _--target_ server to migrate:
+
+image::mta-target.png[MTA Add App, 700]
+
+Click on `--source` to migrate from then select `weblogic`. Leave the other configurations:
+
+image::mta-source.png[MTA Add App, 700]
+
+== 2.4. Run an analysis report
+
+Click on `Run` icon to analyze the WebLogic application. Note that if you don't see the _Run_ icon, you need to click on the _mtaConfiguration_:
+
+image::mta-run-report.png[MTA Add App, 700]
+
+Migration Toolkit for Applications (MTA) CLI will be executed automatically in a new terminal then it will take a few mins to complete the analysis. Click on `Open Report`:
+
+image::mta-analysis-complete.png[MTA Add App, 900]
+
+== 2.5. Review the report
+
+image::rhamt_result_landing_page.png[MTA Langing Page, 900]
+
+The main landing page of the report lists the applications that were processed. Each row contains a high-level overview of the
+story points, number of incidents, and technologies encountered in that application.
+
+**Click on the `monolith` link** to access details for the project:
+
+image::rhamt_project_overview.png[MTA Project Overview, 900]
+
+== 2.6. Understanding the report
+
+The Dashboard gives an overview of the entire application migration effort. It summarizes:
+
+* The incidents and story points by category
+* The incidents and story points by level of effort of the suggested changes
+* The incidents by package
+
+[NOTE]
+====
+Story points are an abstract metric commonly used in Agile software development to estimate the relative level of effort needed to
+implement a feature or change. Migration Toolkit for Application uses story points to express the level of effort needed to
+migrate particular application constructs, and the application as a whole. The level of effort will vary greatly depending on the
+size and complexity of the application(s) to migrate.
+====
+
+You can use this report to estimate how easy/hard each app is, and make decisions about which apps to migrate, which to refactor, and which to leave alone. In this case we will do a straight migration to JBoss EAP.
+
+On to the next step to change the code!
