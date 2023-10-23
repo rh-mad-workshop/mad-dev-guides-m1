@@ -1,5 +1,5 @@
-name: mad-dev-guides-mono2micro
-title: Module CHS - Migration to EAP
+name: mad-dev-guides-m1
+title: Module 1 - Assessment and Analysis
 version: main
 nav:
   - modules/ROOT/nav.adoc

@@ -1,7 +1,7 @@
 {
-  "name": "mad-dev-guides-mono2micro",
-  "description": "Modern Application Development Dev Track - Migration to EAP",
-  "homepage": "https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-mono2micro.git",
+  "name": "mad-dev-guides-m1",
+  "description": "Modern Application Development Dev Track - Module 1",
+  "homepage": "https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-m1.git",
   "author": {
     "email": "doh@redhat.com",
     "name": "Daniel Oh",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-mono2micro.git"
+    "url": "git+https://https://github.com/RedHat-Middleware-Workshops/mad-dev-guides-m1.git"
   },
   "license": "Apache-2.0",
   "babel": {
