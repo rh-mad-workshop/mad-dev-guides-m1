@@ -24,7 +24,7 @@ Globex is a fictional company we will use for this workshop. The Globex system i
 
 image::architecture_initial.png[architecture_initial]
 
-Your initial state for this workshop is an environment that is spread over Red Hat Virtualization and Red Hat OpenShift Container Platform.
+Your initial state for this workshop is an environment that is spread over Legacy Virtualization and Red Hat OpenShift Container Platform.
 
 Your application has already been partially moved from your legacy environments to OpenShift.
 
@@ -41,8 +41,8 @@ All source code for the applications as well as the GitOps YAML manifests for al
 
 The problem right now is in the *customers* service:
 
-* The customers service uses an old Java code base running on Apache Tomcat in a VM on Red Hat Virtualization. In this module you will assess and analyze this legacy Java application to learn the best way to modernize the Java code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.
-* The customers database is using an Oracle database running as a VM in Red Hat Virtualization. Because this is Oracle you can not deploy the database as a Pod on OpenShift. Instead you will lift and shift the VM to OpenShift Virtualization using the Migration Toolkit for Virtualization.
+* The customers service uses an old Java code base running on Apache Tomcat in a VM on Legacy Virtualization. In this module you will assess and analyze this legacy Java application to learn the best way to modernize the Java code and then deploy the application to OpenShift on top of Red Hat JBoss Web Server.
+* The customers database is using an PostgreSQL database running as a VM in Legacy Virtualization. The IT Ops team at Globex want to keep running the PostgreSQL database on virtualization environment rather than containerization. Therefore, you will lift and shift the VM to OpenShift Virtualization using the Migration Toolkit for Virtualization.
 
 Once you have finished the all of the modules in this workshop, your deployment architecture will look like this:
 
@@ -60,7 +60,7 @@ If your `username` is properly set, then you can move on. *If not, in the above 
 
 image::setuser.png[setuser]
 
-This will customize the links and copy/paste code for this workshop. If you accidentally type the wrong username, just update your username in the URL parameters (e.g. ` 1-introduction.html?USERID=%USERID% ` )
+This will customize the links and copy/paste code for this workshop. If you accidentally type the wrong username, just update your username in the URL parameters (e.g., `1-introduction.html?USERID=%USERID%` )
 
 [IMPORTANT]
 ====
@@ -72,8 +72,8 @@ You have to use *an unique username* (e.g. `%USERID%`) while you're running the 
 Your OpenShift cluster is already configured with everything you need. Here are the details:
 
 * `Gitea` to host the source code repositories
-* `OpenShift Virtualization` to ultimately run the migrated Oracle VM
-* `Migration Toolkit for Virtualization` to facilitate the migration of the Oracle VM to Red Hat OpenShift Container Platform
+* `OpenShift Virtualization` to ultimately run the migrated PostgreSQL VM
+* `Migration Toolkit for Virtualization` to facilitate the migration of the PostgreSQL VM to Red Hat OpenShift Container Platform
 * `OpenShift GitOps` to manage the deployed services using a GitOps approach through ArgoCD
 * `OpenShift Pipelines` to build the customer application from source code and deploy to the `retail` project using GitOps
 * `Migration Toolkit for Applications` to help modernize the customer service.
@@ -140,7 +140,7 @@ Click through the three panels on the left.
 
 == 1.4. Access the Customer Data
 
-The RHV environment not only has the Oracle Database VM deployed but it also hosts another VM which runs the old customer application on top of Apache Tomcat.
+The RHV environment not only has the PostgreSQL Database VM deployed but it also hosts another VM which runs the old customer application on top of Apache Tomcat.
 
 From a terminal window you can use `curl` to demonstrate that the application is connected to the database.
 
@@ -174,6 +174,25 @@ The output should look like:
 [source,json]
 ----
 {"id":2,"username":"hate_guybrush","name":"Pirate","surname":"Lechuck","address":"Caverns of Meat, no number","zipCode":"MO-666","city":"Giant Monkey Head","country":"Monkey Island"}
+----
+
+== 1.5 Change the Working Project
+
+Make sure to *check out* to the right branch, `patch-postgre` that you'll go through this module today! Run the following `git` command in the VS Code terminal.
+
+[.console-input]
+[source,bash]
+----
+git checkout patch-postgres
+----
+
+The output should be something like this.
+
+[.console-output]
+[source,bash,subs="+attributes,macros+"]
+----
+Switched to branch 'patch-postgres'
+Your branch is up to date with 'origin/patch-postgres'.
 ----
 
 == Congratulations!

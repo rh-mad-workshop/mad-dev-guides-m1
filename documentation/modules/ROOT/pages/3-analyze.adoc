@@ -43,7 +43,7 @@ Update application with the following source code information.
 
 * Repository type - `Git`
 * Source Repository - `https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev.git`
-* Branch - `main`
+* Branch - `patch-postgres`
 * Root path - `package-legacy`
 
 image::application-update-git.png[application-update-git]
@@ -94,7 +94,7 @@ Key in the following information in the repository page.
 
 * Repository type - `Git`
 * Source Repository - `https://gitea.%SUBDOMAIN%/%USERID%/modern-app-dev.git`
-* Branch - `main`
+* Branch - `patch-postgres`
 * Root path - `customrules`
 * Associated credentials - `None`
 
