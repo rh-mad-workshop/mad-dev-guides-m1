@@ -8,7 +8,7 @@ site:
 content:
   sources:
     - url: .
-      branches: main
+      branches: patch-postgres
       start_path: documentation
 
 asciidoc:
