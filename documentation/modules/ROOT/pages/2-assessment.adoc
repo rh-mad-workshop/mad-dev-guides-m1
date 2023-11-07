@@ -68,15 +68,15 @@ Go to `Application inventory` on the left menu in the *Migration* perspective an
 
 image::app-inventory-landing.png[app-inventory-landing]
 
-When you click on `2 more` button, it shows 5 tags.
+It shows 5 tags.
 
-* Oracle
+* PostgreSQL
 * Java
 * Tomcat
 * Corporate Custom Configuration Library
 * RHEL 8
 
-Click on `Cancel`.
+Click on `x` button.
 
 === 2.3.2. Assess the Legacy Customers Application
 
