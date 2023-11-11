@@ -191,8 +191,8 @@ The output should be something like this.
 [.console-output]
 [source,bash,subs="+attributes,macros+"]
 ----
-Switched to branch 'patch-postgres'
-Your branch is up to date with 'origin/patch-postgres'.
+branch 'patch-postgres' set up to track 'origin/patch-postgres'.
+Switched to a new branch 'patch-postgres'
 ----
 
 == Congratulations!
