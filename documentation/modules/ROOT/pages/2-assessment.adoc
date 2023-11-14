@@ -64,7 +64,7 @@ Let's focus on the legacy application. We have added tags that represent its tec
 
 === 2.3.1. Confirm the Customers Application Inventory
 
-Go to `Application inventory` on the left menu in the *Migration* perspective and click on `pencil` (edit) icon for the customers inventory.
+Go to `Application inventory` on the left menu in the *Migration* perspective and click on `pencil` (edit) icon for the customers application.
 
 image::app-inventory-landing.png[app-inventory-landing]
 
