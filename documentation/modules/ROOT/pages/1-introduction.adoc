@@ -140,7 +140,7 @@ Click through the three panels on the left.
 
 == 1.4. Access the Customer Data
 
-The RHV environment not only has the PostgreSQL Database VM deployed but it also hosts another VM which runs the old customer application on top of Apache Tomcat.
+The legacy environment not only has the PostgreSQL Database VM deployed but it also hosts another VM which runs the old customer application on top of Apache Tomcat.
 
 From a terminal window you can use `curl` to demonstrate that the application is connected to the database.
 
