@@ -60,7 +60,7 @@ image::mta-control-business-service.png[business service]
 
 == 2.3. Application inventory
 
-Let's focus on the legacy application. We have added tags that represent its technology such as `Java`, `Tomcat` and `Oracle`, and decided to add a custom tag type that allows us to identify which custom architecture libraries are used by each application.
+Let's focus on the legacy application. We have added tags that represent its technology such as `Java`, `Tomcat` and `PostgreSQL`, and decided to add a custom tag type that allows us to identify which custom architecture libraries are used by each application.
 
 === 2.3.1. Confirm the Customers Application Inventory
 
