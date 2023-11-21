@@ -38,7 +38,7 @@ image::app-mod-report-2022.png[app-mod-report-2022]
 * Red Hat Enterprise Virtualization
 * Red Hat Application Runtimes (Quarkus, Spring Boot, Node.js, Tomcat)
 * Red Hat OpenShift (Pipeline, GitOps, Virtualization)
-* Oracle Database and PostgreSQL
+* PostgreSQL Database and PostgreSQL
 
 ## Documentation
 
