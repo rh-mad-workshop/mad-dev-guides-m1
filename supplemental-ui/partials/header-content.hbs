@@ -1,15 +1,26 @@
 <header class="header">
   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () { 
+    document.addEventListener('DOMContentLoaded', function () {
       const urlParams = new URLSearchParams(window.location.search);
-      const userId = urlParams.get('USERID');
-      const subDomain = urlParams.get('SUBDOMAIN');
-      const tomcatIP = urlParams.get('TOMCATIP');
-      if (userId) {
+      const userId = urlParams.get('USERID') || localStorage.getItem('userId');
+      const subDomain = urlParams.get('SUBDOMAIN') || localStorage.getItem('subDomain');
+      const tomcatIP = urlParams.get('TOMCATIP') || localStorage.getItem('tomcatIP');
+      if (userId && userId != null ) {
+        localStorage.setItem('userId', userId);
         showUserId( userId );
       }
       else {
         showUserIdForm();
+      }
+      if (subDomain && subDomain != null ) {
+        localStorage.setItem('subDomain', subDomain);
+        document.getElementById('subDomain').value = subDomain;
+        document.body.innerHTML = document.body.innerHTML.replace(/%SUBDOMAIN%/g, subDomain);
+      }
+      if (tomcatIP && tomcatIP != null ) {
+        localStorage.setItem('tomcatIP', tomcatIP);
+        document.getElementById('tomcatIP').value = tomcatIP;
+        document.body.innerHTML = document.body.innerHTML.replace(/%TOMCATIP%/g, tomcatIP);
       }
     } );
 
@@ -18,9 +29,7 @@
       document.getElementById('navbar-form-empty').style.display = "none";
       document.getElementById('navbar-form-filled').style.display = "flex";
       document.getElementById('username').textContent = userId;
-      document.getElementById('subDomain').value = subDomain;
-      document.getElementById('tomcatIP').value = tomcatIP;
-
+      document.body.innerHTML = document.body.innerHTML.replace(/%USERID%/g, userId);
     }
 
     function showUserIdForm( userId ) {
@@ -29,11 +38,22 @@
     }
 
     function goWithUserId() {
-      elUserIdInput = document.getElementById('userId');
-      elSubDomainInput = document.getElementById('subDomain');
-      elTomcatIPInput = document.getElementById('tomcatIP');
+      var searchParams = '';
+      if (document.getElementById('userId').value !== '') {
+        searchParams += 'USERID=' + document.getElementById('userId').value;
+      }else{
+        if (localStorage.getItem('userId') !== null) {
+          searchParams += 'USERID=' + localStorage.getItem('userId');
+        }
+      }
+      if (localStorage.getItem('subDomain') !== null) {
+        searchParams += '&SUBDOMAIN=' + localStorage.getItem('subDomain');
+      }
+      if (localStorage.getItem('tomcatIP') !== null) {
+        searchParams += '&TOMCATIP=' + localStorage.getItem('tomcatIP');
+      }
 
-      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&TOMCATIP=' + elTomcatIPInput.value);
+      window.location.search = searchParams;
     }
 
   </script>
@@ -48,7 +68,7 @@
         <span></span>
       </button>
     </div>
-    
+
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item" id="navbar-form-empty">
@@ -65,7 +85,7 @@
             <input type="hidden" id="tomcatIP" name="tomcatIP" value="">
           </form>
         </div>
-        
+
         <div class="navbar-item" id="navbar-form-filled" style="display: none;">
           <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
